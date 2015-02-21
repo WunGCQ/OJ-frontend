@@ -1,0 +1,344 @@
+/*日程控件*/
+#schedule-board-box {
+    display: block;
+    position: relative;
+    margin-top: 5px;
+    width: 385px;
+    /*height: 580px;*/
+    height: calc(100% - 100px);
+    min-height: 580px;
+    z-index: 5;
+    font-family:  Arial, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', '宋体', 宋体, Tahoma, Arial, Helvetica, STHeiti;
+}
+#schedule-board-header {
+    display: block;
+    position: relative;
+    background-color: rgba(255, 255, 255, .4);
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    height: 50px;
+    width: 100%;
+    line-height: 50px;
+    border-radius: 5px 5px 0 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+#schedule-board-header span,#schedule-board-header svg {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    cursor: default;
+}
+#schedule-board-header svg {
+    margin-left: 10px;
+}
+#schedule-board-header span{
+    font-size: 24px;
+    margin-left: -15px;
+    color: #0F0A0E;
+}
+#schedule-board-title {
+    display: block;
+    position: relative;
+    box-sizing: content-box;
+    margin:  0;
+    width: 100%;
+    height: 70px;
+    padding: 0;
+    background-color: rgba(255, 255, 255, .15);
+    cursor: default;
+}
+
+#schedule-board-title-right-box {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    width: 320px;
+    height: 100%;
+}
+
+#schedule-board-box .time-box {
+    position: relative;
+    border-right: 1px solid #9a9a9a;
+    width: 52px;
+    text-align: center;
+}
+#schedule-board-title .time-box {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 20px;
+    height: 50px;
+}
+
+#schedule-board-box .time-box span {
+    color: #696969;
+    font-weight: 600;
+}
+
+#schedule-board-box .time-line-point {
+    display: block;
+    position: absolute;
+    right: -5px;
+    width: 7px;
+    height: 7px;
+    border-radius: 7px;
+    background-color: #B3B3B3;
+    border: 1px solid #808080;
+    z-index: 998;
+}
+
+#schedule-board-title .time-line-point {
+    top: 1px;
+}
+
+#schedule-board-title table {
+    margin-top: 20px;
+    margin-left: 10px;
+    width: 100%;
+}
+#schedule-board-title tr>td:first-child {
+    width: 85px;
+}
+#schedule-board-title td {
+    color:#333;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+#schedule-board-title a {
+    display: block;
+    position: absolute;
+    color: #fff;
+    right: 0px;
+    bottom: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    opacity: 0.5;
+    transition: opacity 0.5s;
+}
+#schedule-board-title a:hover {
+    opacity: 1;
+}
+
+#schedule-board-list-box {
+    display: block;
+    position: relative;
+    margin: 0;
+    width: 100%;
+    height: calc(100% - 170px);
+    /*height: 410px;*/
+    background-color: rgba(255, 255, 255, .15);
+    overflow: hidden;
+}
+#schedule-board-list-box ul {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+#schedule-board-list-box li {
+    display: block;
+    width: 100%;
+    height: 55px;
+}
+#schedule-board-list-box .time-box {
+    display: inline-block;
+    vertical-align: top;
+    height: 55px;
+    line-height: 55px;
+    cursor: default;
+}
+
+#schedule-board-list-box .time-line-point {
+    top: 22px;
+}
+
+#schedule-board-list-box .schedule-box {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    width: 331px;
+    height: 55px;
+    padding: 0;
+    margin-left: -3px;
+    /*float: right;*/
+    cursor: default;
+}
+#schedule-board-list-box .schedule-name-wrapper {
+    display: inline-block;
+    vertical-align: top;
+    width: 165px;
+    height: 100%;
+}
+#schedule-board-list-box .schedule-name-box {
+    display: table;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    color:#333;
+    font-size: 16px;
+}
+#schedule-board-list-box .schedule-name-box span {
+    display: table-cell;
+    vertical-align: middle;
+    line-height: 20px;
+    padding-left: 15px;
+    font-weight: 600;
+}
+#schedule-board-list-box .schedule-detail-box {
+    display: inline-block;
+    vertical-align: top;
+    height: 100%;
+    width: 160px;
+}
+#schedule-board-list-box .schedule-detail-box>div{
+    display:inline-block;
+    vertical-align: top;
+    font-size: 14px;
+    color:#333;
+    height: 50%;
+}
+#schedule-board-list-box .teacher-info {
+    width: 100%;
+    line-height: 30px;
+    padding-left:5px;
+}
+#schedule-board-list-box .classroom-info {
+    width: 60%;
+    padding-left: 5px;
+}
+#schedule-board-list-box .fa {
+    color:#fff;
+    font-size: 14px;
+    margin-right: 3px;
+}
+
+#add-schedule {
+    display: block;
+    position: absolute;
+    width: 38px;
+    height: 38px;
+    border-radius: 40px;
+    background: transparent;
+    border: 2px solid rgba(0, 0, 0, .2);
+    left: 32px;
+    bottom: 50px;
+    text-align: center;
+    line-height: 38px;
+    font-size: 30px;
+    font-weight: 600;
+    color: #fff;
+    opacity: 0.5;
+    cursor: pointer;
+    transition: transform 0.5s, -moz-transform 0.5s, -webkit-transform 0.5s, -ms-transform 0.5s, opacity 0.3s, border-color 0.3s;
+}
+#add-schedule:hover {
+    text-decoration: none;
+    opacity: 0.8;
+    border-color: rgba(255,255,255,0.6);
+    transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -webkit-transform:rotate(90deg);
+    -ms-transform:rotate(90deg);
+}
+
+#schedule-board-user-bar {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 52px;
+    /*background-image: url('../images/user-bar.png');*/
+    /*background-color: rgba(255, 255, 255, .1);*/
+    border-radius: 0 0 3px 3px;
+}
+#schedule-board-user-bar .gradient-bg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 52px;
+    opacity: 0.2;
+    background: -webkit-linear-gradient(top,#4b98e3, #8d90aa);
+    background: -ms-linear-gradient(top,#4b98e3, #8d90aa);
+    background: -moz-linear-gradient(top,#4b98e3, #8d90aa);
+    border-radius: 0 0 5px 5px;
+}
+#schedule-board-user-bar .user-head-box {
+    display: inline-block;
+    position: relative;
+    width: 52px;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 0 0 0 5px;
+    z-index: 15;
+    cursor: pointer;
+}
+.user-head-box img {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    z-index: 15;
+
+}
+#is-online {
+    display: block;
+    position: absolute;
+    left:63px;
+    top: 5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    border: 2px solid #fff;
+    background-color: #66CD00;
+    cursor: pointer;
+    z-index: 5;
+}
+#schedule-board-user-bar .up-box, #schedule-board-user-bar .comment-box {
+    margin-left: 10px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+#user-bar-could-icon,#user-bar-message-icon {
+    display: inline-block;
+    position: relative;
+    vertical-align: bottom;
+    margin-top: 10px;
+    margin-right: 18px;
+    z-index: 15;
+    font-size: 30px;
+    color:#fff;
+    opacity: 0.4;
+    float: right;
+    transition: opacity 0.5s;
+}
+#user-bar-message-icon {
+    margin-top: 7px;
+}
+#user-bar-could-icon:hover ,#user-bar-message-icon:hover {
+    opacity: 1;
+}
+
+
+
+
+
+#create-new-schedule-control {
+    background-color: #4b98e3;
+}
+
+
+
+
+.color1 {
+    background-color: #98C5FF;
+}
+.color2 {
+    background-color: #6ED4C6;
+}
+.color3 {
+    background-color: #69CCE9;
+}

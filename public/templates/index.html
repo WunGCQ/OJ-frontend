@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>OJ4Th</title>
+
+    <!--加载重置样式-->
+    <link rel="stylesheet" href="../stylesheets/reset.css"/>
+    <!-- 加载主体layout样式-->
+    <link rel="stylesheet" href="../stylesheets/layout.css"/>
+    <!--加载header样式表-->
+    <link rel="stylesheet" href="../stylesheets/header.css"/>
+    <!--加载banner样式表-->
+    <link rel="stylesheet" href="../stylesheets/banner.css"/>
+    <!--交互动画-->
+    <link rel="stylesheet" href="../stylesheets/animations.css"/>
+    <!--登陆注册页-->
+    <link rel="stylesheet" href="../stylesheets/modal.css"/>
+    <!--表单样式-->
+    <link rel="stylesheet" href="../stylesheets/form.css"/>
+    <!--font-awesome-->
+    <link rel="stylesheet" href="../font-awesome-4.2.0/css/font-awesome.min.css"/>
+    <!--顶端消息栏-->
+    <link rel="stylesheet" href="../stylesheets/topMessage.css"/>
+
+    <!--smalljq-->
+    <script src="../javascripts/lib/iPtdqx.js"></script>
+    <!--cookie-->
+    <script src="../javascripts/lib/cookie.js"></script>
+    <!--跳转-->
+    <script src="../javascripts/lib/jRouter.js"></script>
+    <!--ajax-->
+    <script src="../javascripts/lib/ajax.min.js"></script>
+    <!--加载用户模块-->
+    <script src="../javascripts/Models/UserModel.js"></script>
+    <!--路由跳转控制器-->
+    <script src="../javascripts/Controllers/RouteController.js"></script>
+</head>
+<body>
+<div class="full-screen moving-show-animate">
+    <div id="container">
+        <header id="nav">
+            <span onclick="window.open('/index/');">Online Judge 4th</span>
+            <a class="nav-item" href="/index/">
+                <span>主页</span>
+                <i></i>
+            </a><a class="nav-item" href="/problem/2">
+            <span>题目</span>
+            <i></i>
+        </a><a class="nav-item" href="/contest/">
+            <span>比赛</span>
+            <i></i>
+        </a><a class="nav-item" href="/message/">
+            <span>消息</span>
+            <i></i>
+        </a><a class="nav-item" href="/group/">
+            <span>小组</span>
+            <i></i>
+        </a><a class="nav-item" id="search-bar" onmouseover="document.getElementById('search-nav').classList.add('show-menu-animate');">
+            <span>搜索</span>
+            <i></i>
+        </a>
+            <ul id="search-nav" class="sub-nav" onmouseleave="document.getElementById('search-nav').classList.remove('show-menu-animate');" onblur="document.getElementById('search-nav').classList.remove('show-menu-animate');">
+                <li>
+                    <a href="#">搜题目</a>
+                </li>
+                <li>
+                    <a href="#">搜用户</a>
+                </li>
+                <li>
+                    <a href="#">搜比赛</a>
+                </li>
+                <li>
+                    <a href="#">搜小组</a>
+                </li>
+            </ul>
+
+            <ul class="nav-item unlog" id="user-bar" onmouseover="(function(){if(document.getElementById('user-bar').classList.contains('log')){document.getElementById('user-nav').classList.add('show-menu-animate');}})();">
+                <li class="user-btn"><a href="">我</a></li>
+                <li class="login-btn"><a href="/login/">登录</a></li>
+                <li class="register-btn"><a href="/register/">注册</a></li>
+                <i></i>
+            </ul>
+
+            <ul id="user-nav" class="sub-nav" onmouseleave="document.getElementById('user-nav').classList.remove('show-menu-animate');" onblur="document.getElementById('user-nav').classList.remove('show-menu-animate');">
+                <li>
+                    <a class="user-name">用户名</a>
+                </li>
+                <li>
+                    <a>用户设置</a>
+                </li>
+                <li>
+                    <a>登出</a>
+                </li>
+            </ul>
+        </header>
+        <div id="banner" class="banner">
+            <a href="http://www.baidu.com" target="_blank">hehe</a>
+        </div>
+    </div>
+
+</div>
+
+<!--<h1>BUAA 在线评测系统</h1>-->
+<script>
+    window.onload = function()
+    {
+        //window.UI_animate = new UI_Animate();
+        window.currentPagejRouter = jRouter(window.location.href);
+        setRouteController();
+        jRouter.parseAnchor();
+        //setActiveLink();
+        currentPagejRouter.initPage();
+        //还有一个页面回调函数
+        //alert('!!!');
+        //alert(window.location.href);
+
+        //currentPagejRouter.loadTemplate();
+        //currentPagejRouter.loadModelData();
+        //initUserModel();
+    };
+    window.addEventListener('popstate', function(e) {
+        if (e.state) {
+            console.log(e.state);
+            setActiveLink();
+            window.currentPagejRouter = jRouter(window.location.href);
+            setRouteController();
+            currentPagejRouter.initPage('replace');
+            jRouter.parseAnchor();
+//
+        }
+        // 当然也可以直接使用history.state来获取当前对应的state数据。
+    });
+//    window.onpopstate = function(state){
+//        console.log(history.state);
+//        window.currentPagejRouter = jRouter(window.location.href);
+//        setRouteController();
+//        //currentPagejRouter.initPage();
+//        jRouter.parseAnchor();
+//
+//    };
+
+
+
+
+
+
+
+</script>
+
+
+<!--jq-->
+<script src="../javascripts/lib/jquery-1.10.0.js"></script>
+<script src="../javascripts/Models/Model.js"></script>
+</body>
+<div id="login-window" class="modal-background">
+    <h1 class="modal-oj-title">Online Judge 4th</h1>
+    <div class="left-intro">
+        <img src="../images/intro.png" width="200" alt=""/>
+        <!--<img src="../images/mail.png" width="100" alt=""/>-->
+
+        <!--<h1>简洁 舒适<br/>评测机系统<br/>来到你身边</h1>-->
+    </div>
+    <div class="modal-window">
+        <div class="modal-content">
+            <form>
+                <input type="text" placeholder="用户名"/><span class="fa fa-user"></span>
+                <input type="password" class="error-input" placeholder="密码"/><span class="fa fa-lock"></span>
+            </form>
+            <a class="button" tabindex="0">登录</a>
+            <a href="/register/" class="register-link flat-link">前往注册~</a>
+            <span>&nbsp;&nbsp;</span>
+            <a href="/forgetPassword/" class="password-back-link flat-link">忘记密码？</a>
+            <a href="/index/" class="flat-link">回到主页</a>
+        </div>
+    </div>
+</div>
+<div id="register-window" class="modal-background">
+    <h1 class="modal-oj-title">Online Judge 4th</h1>
+    <div class="left-intro">
+        <img src="../images/intro.png" width="200" alt=""/>
+        <!--<img src="../images/mail.png" width="100" alt=""/>-->
+
+        <!--<h1>简洁 舒适<br/>评测机系统<br/>来到你身边</h1>-->
+    </div>
+    <div class="modal-window">
+        <div class="modal-content">
+            <form>
+                <input type="text" name="username" placeholder="用户名 / 学号"/><span class="fa fa-user"></span>
+                <input type="text" name="nickname" placeholder="输入您的昵称"><span class="fa fa-info-circle"></span>
+                <input type="email" name="email" placeholder="邮件地址，用于找回密码"/><span class="fa fa-envelope"></span>
+                <input type="password" name="password" class="error-input" placeholder="密码"/><span class="fa fa-lock"></span>
+                <input type="password" name="password-again" placeholder="重复一遍您的密码"/><span class="fa fa-lock"></span>
+            </form>
+            <a class="button" tabindex="0">注册</a>
+            <a href="/login/"  class="flat-link">返回登陆</a>
+            <a href="/index/" class="flat-link">回到主页</a>
+        </div>
+    </div>
+</div>
+
+<!--组件 顶端消息栏-->
+<script src="../javascripts/lib/topMessage.js"></script>
+<!--注册控制器-->
+<script src="../javascripts/Controllers/registerController.js"></script>
+</html>

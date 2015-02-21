@@ -1,0 +1,15 @@
+{
+  "status":1,
+  "user":{
+    "id":  233,
+    "username":  "wcq",
+    "password":  "srf_saaby",
+    "nickname":  "小王子",
+    "student_id": "1221XXXX",
+    "school":  	  "主北",
+    "college":    "college of software",
+    "self_intro":  "Im Saaby",
+    "head":      "../doge.jpg"
+    "email":      "saaby@haha.com"
+  }
+}

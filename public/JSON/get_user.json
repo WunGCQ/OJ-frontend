@@ -1,0 +1,15 @@
+{
+  "status":1,
+  "user":{
+    "id":  233,
+    "username":  "szm",
+    "password":  "szmdb233",
+    "nickname":  "荣芓萌",
+    "student_id": 122110233,
+    "school":  	  "BUAA",
+    "college":    "college of software",
+    "self_intro":  "54 db",
+    "head":      "../images/szm.jpg",
+    "email":      "szm@db.com"
+  }
+}

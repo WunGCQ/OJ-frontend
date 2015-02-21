@@ -1,0 +1,228 @@
+html {
+    background: transparent;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+body {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    /*background: url(../images/bg_new.jpg) repeat;*/
+    /*background: url('../images/index_bg.jpg') 50% 50% /cover repeat-x;*/
+    /*background-image: url('../images/index_bg.jpg');*/
+    /*-moz-background-size: 100% 100%; *//*  Firefox 3.6 */
+    /*-o-background-size: 100% 100%;*//* Opera 9.5 */
+    /*-webkit-background-size: 100% 100%;*//* Safari 3.0 */
+    /*background-size: 100% 100%;*//*  Firefox 4.0 and other CSS3-compliant browsers */
+    /*-moz-border-image: url('../images/index_bg.jpg') 0; *//* Firefox 3.5 */
+    /*filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/index_bg.jpg', sizingMethod='scale');*/
+}
+
+#mov-bg {
+    min-width: 100%;
+    min-height:100%;
+    width: auto;
+    height: auto;
+    display: block;
+    position: absolute;
+    z-index: 0;
+    transition: all ease 0.5s;
+}
+#bg-glass {
+    min-width: 100%;
+    min-height:100%;
+    width: auto;
+    height: auto;
+    display: block;
+    position: absolute;
+    z-index: 10;
+}
+.inactive {
+    visibility: hidden;
+}
+.card {
+    display: block;
+    position: absolute;
+    z-index: 999;
+    width: 285px;
+    height: 375px;
+    margin-left: 102px;
+    margin-top: 117px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, .451);
+    text-align: center;
+}
+.buaa-logo {
+    display: block;
+    position: absolute;
+    width: 45px;
+    height: 62px;
+    left: 40px;
+    top: -5px;
+    background-image: url(../images/home.jpg);
+    background-position: 4px 3px;
+    background-repeat: no-repeat;
+    background-color: #35ABD9;
+    background-size: 90% 90%;
+    box-shadow: 3px 3px 10px 2px rgba(0, 0, 0, .1);
+    transition: top ease 0.5s;
+}
+.logo-shadow {
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 37px;
+    top: -5px;
+    border-left: 3px solid transparent;
+    border-bottom: 5px solid #0c81ac;
+}
+.tp-logo {
+    display: block;
+    position: relative;
+    width: 63px;
+    height: 50px;
+    margin-top: 85px;
+    margin-left: 30px;
+    background-image: url('../images/TP.png');
+}
+.card form{
+    display: block;
+    position: relative;
+    text-align: center;
+    width: 230px;
+    padding: 0;
+    margin: 15px auto 15px auto;
+
+
+}
+.card form input {
+    display: block;
+    position: relative;
+    width: calc(100% - 4px);
+    height: 36px;
+    margin: 3px auto;
+    background: transparent;
+    border-radius: 3px;
+    border:1px solid #666;
+    font-size: 16px;
+    color:#555;
+    text-indent: 1em;
+    transition: all 0.3s ease;
+    outline: none;
+}
+.CAPTCHA-box {
+    width: 100%;
+    margin: 0 auto 0 auto;
+    height: 36px;
+    text-align: left;
+}
+.CAPTCHA {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    width: 35%;
+    height: 34px;
+    margin-top: 1px;
+    border: 1px solid #fff;
+}
+.small-input {
+    display: inline-block !important;
+    margin: 0 !important;
+    vertical-align: top;
+    width: 60% !important;
+}
+.card form input:focus {
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 4px rgba(0, 0, 0, .6);
+}
+.card form .button {
+    display: block;
+    position: relative;
+    width: calc(100% - 2px);
+    margin: 51px auto 8px auto;
+    height: 36px;
+    line-height: 36px;
+    background-color: rgba(53, 171, 217, .6);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all ease 0.3s;
+}
+#register .button {
+    margin-top: 10px;
+}
+.button .fa{
+    color:#fff;
+    font-weight: lighter;
+    font-size: 20px;
+}
+.card form .button:hover {
+    background-color: rgba(53, 171, 217, .8);
+}
+.card form .button:active {
+    background-color: rgba(53, 171, 217, 1);
+}
+.card a{
+    color:#666;
+}
+.register-link, .login-link {
+    float: left;
+}
+.password-back-link {
+    float: right;
+}
+#password-back .register-link {
+    float: right;
+}
+#register table{
+    margin: 82px auto 5px auto;
+    width: 230px;
+}
+#register table tr, #register table tbody{
+    width: 100%;
+}
+
+#register table td{
+    width: 33%;
+}
+#register table td:first-child {
+    text-align: left;
+}
+#register table td:nth-child(2) {
+    text-align: center;
+}
+#register table td:last-child {
+    text-align: right;
+}
+#password-back #nav {
+    display: block;
+    width: 230px;
+    text-align: left;
+    margin: 123px auto 10px auto;
+}
+
+.active-link {
+    color:#444 !important;
+}
+.active-link:hover {
+    text-decoration: none;
+}
+.inactive-link:hover {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
+}
+
+
+
+.in {
+    -webkit-animation-timing-function: ease-out;
+    -webkit-animation-duration: 350ms;
+    animation-timing-function: ease-out;
+    animation-duration: 350ms;
+}
+.out {
+    -webkit-animation-timing-function: ease-in;
+    -webkit-animation-duration: 225ms;
+    animation-timing-function: ease-in;
+    animation-duration: 225ms;
+}
