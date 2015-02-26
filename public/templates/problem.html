@@ -1,87 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>OJ4Th</title>
 
-    <!--加载重置样式-->
-    <link rel="stylesheet" href="../stylesheets/reset.css"/>
-    <!-- 加载主体layout样式-->
-    <link rel="stylesheet" href="../stylesheets/layout.css"/>
-    <!--加载header样式表-->
-    <link rel="stylesheet" href="../stylesheets/header.css"/>
-    <!--加载banner样式表-->
-    <link rel="stylesheet" href="../stylesheets/banner.css"/>
-    <!--交互动画-->
-    <link rel="stylesheet" href="../stylesheets/animations.css"/>
-
-    <!--jq-->
-    <script src="../javascripts/lib/jquery-1.10.0.js"></script>
-    <!--UI动画-->
-    <script src="../javascripts/lib/cookie.js"></script>
-    <!--跳转-->
-    <script src="../javascripts/lib/jRouter.js"></script>
-</head>
-<body onbeforeunload="UI_animate.closeAnimate();" onunload="UI_animate.closeAnimate();">
-    <div class="full-screen moving-show-animate">
-        <div id="container">
-            <header id="nav">
-                <span>Online Judge 4th</span>
-                <a  href="#">
-                    <span>主页</span>
-                    <i></i>
-                </a><a href="#">
-                <span>题目</span>
-                <i></i>
-            </a><a href="#">
-                <span>比赛</span>
-                <i></i>
-            </a><a href="#">
-                <span>消息</span>
-                <i></i>
-            </a><a href="#">
-                <span>搜索</span>
-                <i></i>
-            </a>
-                <ul id="search-nav" class="sub-nav">
-                    <li>
-                        <a href="#">搜题目</a>
-                    </li>
-                    <li>
-                        <a href="#">搜用户</a>
-                    </li>
-                    <li>
-                        <a href="#">搜比赛</a>
-                    </li>
-                    <li>
-                        <a href="#">搜小组</a>
-                    </li>
-                </ul>
-                <script>
-                    (function setActiveLink() {
-                        var href = window.location.href;
-                        var navLinkArray = ['index','problem','contest','message','search'];
-                        for(var i =0; i<navLinkArray.length; i++) {
-                            if(href.indexOf(navLinkArray[i])!=-1) {
-                                document.getElementById('nav').getElementsByTagName('a')[i].classList.add('active-link');
-                                return;
-                            }
-                        }
-                    })();
-                </script>
-
-            </header>
-            <div class="banner">
-
+        <article>
+            <h2 ${problem.title} </h2>
+            <input type="hidden" data-problem-id="{problem.id}"/>
+            <span>编号: ${problem.id}</span>
+            <span>作者：${problem.creater_id}</span>
+            <span>所属小组 ${problem.belong_group}</span>
+            <time>最后编辑时间: ${problem.lastedit_time}</time>
+            <div class="test_setting">
+                <p>
+                    <!--TODO 需要搞明白test_setting 具体格式-->
+                    ${problem.test_setting}
+                </p>
             </div>
-        </div>
-    </div>
-    <!--<h1>BUAA 在线评测系统</h1>-->
-    <script>
-        window.onload = function(){
-            window.UI_animate = new UI_Animate();
-        }
-    </script>
-
-</body>
-</html>
+            <section>
+                ${problem.description}
+            </section>
+        </article>

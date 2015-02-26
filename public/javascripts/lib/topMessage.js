@@ -27,6 +27,15 @@ function topMessage(arg)
     //this.closeElement.innerHTML = '×';
     this.entity.appendChild(this.closeElement);
 
+    window.removeAllMessages = function()
+    {
+        var topMessageArray = document.getElementsByClassName('Top-Message');
+        for(var i = 0; i < topMessageArray.length; i++)
+        {
+            document.body.removeChild(topMessageArray[i]);
+        }
+    };
+
 
     var body = document.getElementsByTagName('body')[0];
 
@@ -35,22 +44,16 @@ function topMessage(arg)
 
     //绑定点击关闭事件
     this.closeElement.addEventListener('click',function(){
-        document.getElementsByClassName('Top-Message')[0]._css('opacity',0);
-        setTimeout(
-            (
-                function()
-                {
-                    document.body.removeChild(document.getElementsByClassName('Top-Message')[0]);
-                }()),
-                500
-        );
+        document.body.removeChild(this.parentNode);
 
     });
 
     //
     return this;
 }
-topMessage({
-    Message:'here is your message',
-    Type:'success'
-});
+
+//示例
+//topMessage({
+//    Message:'here is your message',
+//    Type:'success'
+//});

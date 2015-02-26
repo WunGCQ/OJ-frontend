@@ -1,12 +1,21 @@
 html {
-    background-color: #16a085;
+    background-color: #1ABC9C;
+    height: auto;
+    min-height: 100%;
+    margin: 0;
 }
 body {
+    display: block;
     text-align: center;
-    background-color: #16a085;
+    margin: 0;
+    background-color: #1ABC9C;
+    /*height: auto;*/
+    height: 100%;
 }
 .full-screen{
     opacity: 0;
+    /*height: 100%;*/
+    height: auto;
 }
 h1 {
     position: relative;
@@ -23,12 +32,15 @@ h1 {
     margin: 45px auto;
     width: 960px;
     height: auto;
+    min-height: 500px;
     overflow: hidden;
     border-radius: 2px;
-    font-family: "Microsoft YaHei","Microsoft Yahei","微软雅黑","","Helvetica Neue","Courier New", Courier, monospace;
+    font-family: "Microsoft YaHei","Microsoft Yahei","微软雅黑",Helvetica Neue, Helvetica, Arial,"Helvetica Neue","Courier New", Courier;
     font-size: 14px;
     -webkit-font-smoothing: antialiased;
     box-shadow: 0 0 20px 5px rgba(32, 32, 32, .2);
+    background-color: rgba(255, 255, 255, .94);
+    transition: height 0.3s ease;
     /*animation: 1.5s 0.5s show forwards ;*/
 }
 .moving-show-animate {
@@ -38,6 +50,29 @@ h1 {
     -webkit-animation:  0.7s moving-show linear forwards;
     -ms-animation: 0.7s moving-show linear forwards;
 }
+#main-section {
+    width: 100%;
+    height: auto;
+    min-height: calc(100% - 200px);
+    transition: height 0.3s ease;
+
+}
+
+.main-blocks{
+    display: none;
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    clear: both;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    transition: height 0.3s ease;
+}
+
+.left-align{
+    text-align: left;
+}
+
 
 
 

@@ -237,26 +237,42 @@
         else{
             for( var i =0;i<jRouter.prototype.ControllerList.length;i++)
             {
-                var x = jRouter(url).getUrlParam().params[0];
-                console.log(x);
-                if(jRouter.prototype.ControllerList[i].url==url)
-                {
-                    return jRouter.prototype.ControllerList[i].controllerFunction;
+                //var x = jRouter(url).getUrlParam().params[0];
+                //console.log(x);
+                //这种抓取方法仅适用于本站的路径规则，既所有路径都在根路径之后，并且
+                // 路径中去除根路径后若仅有一层，则最后一层表示控制器，
+                //否则表示参数
+                //TODO
+                //todo 以后扩展为在路由规则表中查找
+                //为了本地调试用的
+                var url = new RegExp('.html').test(url) ? url.split('.html')[0] : url;
+                var urlPara = jRouter.getUrlParam(url).params;
+                var controllerUrl = '';
+                if(urlPara.length>1){
+                    controllerUrl = urlPara[urlPara.length-2];//最后一项为参数项，获取前一项即为控制器的名称
                 }
-
+                else if(urlPara.length == 1){
+                    controllerUrl = urlPara[urlPara.length-1];
+                }
+                else{
+                    controllerUrl = 'index';
+                }
+                if(jRouter.prototype.ControllerList[i].url== ('/'+controllerUrl+'/') )
+                {
+                    return [jRouter.prototype.ControllerList[i].controllerFunction,i];
+                }
             }
         }
         return false;
     };
-
     //将URL切片去掉.html后缀后返回参数
     jRouter.getUrlParam =  jRouter.fn.getUrlParam = function(path)
     {
-        var res = {};
-        var protocolTester = new RegExp('http?');
+        var res = new Object();
+        var protocolTester = new RegExp('http?:');
         var path = path || window.location.href;
 
-        res.protocol = protocolTester.exec(path)[0];
+        res.protocol = protocolTester.test(path)?protocolTester.exec(path)[0]:'';
 
         res.domainName = protocolTester.test(path) ? path.split('://')[1].toString().split('/')[0] : window.localDomainName;
         var params = path.split('.html')[0].split('/');
@@ -264,13 +280,14 @@
         for(var i=0; i< params.length; i++)
         {
             //删除参数
-            if(params[i]!=(res.protocol+':') && params[i]!=res.domainName && params[i]!='' )
+            if(params[i]!=(res.protocol) && params[i]!=res.domainName && params[i]!='' )
             {
                 res.params.push(params[i]);
             }
         }
         return res;
     };
+
     jRouter.initPage =jRouter.prototype.initPage = function(isReplace){
         var params = this.getUrlParam().params;
         var childUrl;
@@ -280,14 +297,19 @@
         else{
             childUrl = '/'+params[0]+'/';
         }
-        var fun = jRouter.getControllerByUrl(childUrl);
-        //todo
-        if(isReplace=='replace'){
-            fun(true);
+        var fun = jRouter.getControllerByUrl(childUrl)[0];
+        if(typeof fun =='function')
+        {
+            //todo 添加路径参数
+            //console.log(this.url);
+            if(isReplace=='replace'){
+                fun(true);
+            }
+            else{
+                fun();
+            }
         }
-        else{
-            fun();
-        }
+
 
 
     };
@@ -341,24 +363,50 @@
 
     jRouter.Models = jRouter.prototype.Models;
 
-    jRouter.parseAnchor = function()
+    //解析a标签，支持多种参数传递，包括无参、节点数组、节点
+    jRouter.parseAnchor = function(Anchor)
     {
-        var Anchors = document.getElementsByTagName('a');
+        //这个函数可以接收一个参数Anchor来解析指定的a标签
+
+        if(Anchor == null || typeof Anchor == "undefined")
+        {
+            var Anchors = document.getElementsByTagName('a');//遍历DOM找到所有a标签
+        }
+        else if(Anchor instanceof Array)
+        {   //如果是节点数组的话
+            var Anchors = Anchor;
+        }
+        else{
+            //如果是节点的话,包装成节点的数组
+            var Anchors = [Anchor];
+        }
+        //然后开心地调用咯
         var temp;
         for(var i = 0; i<Anchors.length; i++)
         {
+            //找到a标签的链接地址
             temp = Anchors[i].getAttribute("href");
-
             if(temp!=null && temp.length>0)
             {
-                if(temp[0]!='#' && temp.indexOf('javascript:')==-1 && Anchors[i].getAttribute('target')!='_blank')
+                if(temp[0]!='#' && temp.indexOf('javascript:')==-1 && Anchors[i].getAttribute('target')!='_blank')//
                 {
                     var target = Anchors[i].getAttribute('target')=='_blank' ? 'new' : 'current';
                     var fun = jRouter.fn.getControllerByUrl(temp);
                     if(fun)
                     {
-                        Anchors[i].onclick = fun;
+                        //console.log(temp);
+                        var functionLocation = fun[1];
+                        Anchors[i].setAttribute('data-controller',functionLocation);//在标签中记录
+                        Anchors[i].setAttribute('data-href',temp);
                         Anchors[i].removeAttribute('href');
+                        Anchors[i].addEventListener('click',function(){
+                            var functionLocation = parseInt(this.getAttribute('data-controller'));
+                            var url = this.getAttribute('data-href');//href暂存
+                            var fun = jRouter.prototype.ControllerList[functionLocation].controllerFunction;
+                            fun(false,url);
+                        });
+
+
                     }
                     else
                     {

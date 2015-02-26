@@ -1,11 +1,250 @@
-<div style="width:100%;margin:30px 50px;float:left;text-align:left;color:#f769a0;font-size:150%;text-shadow:0 0 5px rgba(247,105,160,.8);line-height: 30px;">
-    <input type="hidden" name="user-info" data-id="{user.id}" data-usernmae="{user.username}" data-nickname="{user.nickname}" data-student_id="{user.student_id}" data-school="{user.school}" data-college="{user.college}" data-email="{user.email}"/>
-    <img src="{user.head}" width="100px" alt=""/>
-    <h4>俺叫{user.username}<h4>
-        <h4>俺们村银都管俺叫 <b>{user.nickname}</b></h4>
-        <h4>俺的wifi密码是:{user.password}</h4>
-        <p>其实俺自己是这么想的:<b>{user.self_intro}</b></p>
-        <a href="mailto:{user.email}">这是俺的邮箱儿,你们可以随便发小广告 {user.email}</a>
-        <p>介个是俺的学号{user.student_id}</p>
-        <p>俺是非主流，俺为自己代言~~~</p>
-</div>
+<style>
+    #user-info-nav {
+        display: block;
+        list-style: none;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-align: center;
+        overflow: hidden;
+        border-radius: 2px;
+        clear: both;
+    }
+    #user-info-nav li {
+        display: inline-block;
+        padding: 15px 30px;
+        color: #7f8c8d;
+    }
+    #user-info-nav  .active{
+        background-color: #fff;
+        color: #16a085 !important;
+    }
+    #user-info-nav a{
+        color: inherit;
+        transition: all ease 0.3s;
+    }
+    #user-info-nav .fa {
+        color: inherit;
+        margin-right: 15px;
+        font-size: 20px;
+    }
+
+    .user-info-tabs {
+        display: block;
+        margin-left: 10px;
+    }
+    .user-info-tabs input {
+        margin-top: 0;
+    }
+    .user-info-tabs {
+        width: 600px;
+        margin: auto;
+    }
+    #user-info-tab a{
+        display: block;
+        text-align: center;
+        width: 40px;
+        height: 20px;
+        line-height: 20px;
+        padding: 5px 20px;
+        background-color: #2980b9;
+        color: #fff;
+        transition: all ease 0.3s;
+        border-radius: 3px;
+    }
+
+    #user-info-tab a:hover {
+        background-color: #3498db;
+    }
+    #user-info-tab a:focus {
+        background-color: #3498db;
+    }
+
+    #save-user-info-changes{
+        margin: auto;
+    }
+
+    .user-info-tabs tr>td:first-child{
+        text-align: right;
+    }
+    .user-info-tabs tr>td:nth-child(2){
+        text-align: left;
+        text-indent: 3em;
+    }
+    .user-info-tabs tr>td:last-child {
+        text-align: right;
+    }
+    .user-info-tabs tbody tr{
+        height: 40px;
+        line-height: 40px;
+    }
+    .user-info-tabs input{
+        font-size: 14px;
+        padding: 5px 2px 5px 0;
+        width: 90%;
+    }
+    #user-info-tab tr:last-child a, .submit-btn {
+        display: block;
+        text-align: center;
+        margin: auto;
+        width:100px;
+        height: 20px;
+        line-height: 20px;
+        padding: 5px 20px;
+        color: #fff;
+        background-color: #16a085;
+        border-radius: 3px;
+        transition: all ease 0.3s;
+    }
+    #user-info-tab tr:last-child a:hover,.submit-btn :hover {
+        background-color: #1bd4b3;
+    }
+    #user-info-tab tr:last-child a:hover,.submit-btn :focus {
+        background-color: #1bd4b3;
+    }
+
+
+
+</style>
+<ul id="user-info-nav">
+    <li class="active" onclick="UserInfoController.showUserInfoTab('user-info-tab',event)">
+        <a ><span class="fa fa-user"></span>个人资料</a>
+    </li><li onclick="UserInfoController.showUserInfoTab('user-change-password-tab',event)">
+        <a ><span class="fa fa-lock"></span>修改密码</a>
+    </li><li onclick="UserInfoController.showUserInfoTab('user-change-head-tab',event)">
+        <a ><span class="fa fa-camera"></span>修改头像</a>
+    </li>
+</ul>
+<table id="user-info-tab" class="user-info-tabs" >
+    <thead>
+        <tr>
+            <th width="160px"></th>
+            <th width="320px"></th>
+            <th width="120px"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>用户名：</td>
+            <td><span>${user.username}</span></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>昵称：</td>
+            <td>
+                <span>${user.nickname}</span>
+                <input type="hidden" placeholder="请输入昵称"/>
+            </td>
+            <td>
+                <a data-name="nickname" data-value="${user.nickname}" data-if-change="false">修改</a>
+            </td>
+        </tr>
+        <tr>
+            <td>学号：</td>
+            <td>
+                <span>${user.student_id}</span>
+                <!--<input type="hidden" placeholder="请输入学号"/>-->
+            </td>
+            <td>
+                <!--<a data-name="student_id" data-value="${user.student_id}" data-if-change="false">修改</a>-->
+            </td>
+        </tr>
+        <tr>
+            <td>学校：</td>
+            <td>
+                <span>${user.school}</span>
+                <input type="hidden" placeholder="请输入学校名称"/>
+            </td>
+            <td>
+                <a data-name="school" data-value="${user.school}" data-if-change="false">修改</a>
+            </td>
+        </tr>
+        <tr>
+            <td>学院：</td>
+            <td>
+                <span>${user.college}</span>
+                <input type="hidden" placeholder="请输入学院名称"/>
+            </td>
+            <td>
+                <a data-name="college" data-value="${user.college}" data-if-change="false">修改</a>
+            </td>
+        </tr>
+        <tr>
+            <td>自我介绍：</td>
+            <td>
+                <span>${user.self_intro}</span>
+                <input type="hidden" placeholder="简单两句话，介绍你自己~"/>
+            </td>
+            <td>
+                <a data-name="self_intro" data-value="${user.self_intro}" data-if-change="false">修改</a>
+            </td>
+        </tr>
+        <tr>
+            <td>邮件地址：</td>
+            <td><span>${user.email}</span></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>注册时间：</td>
+            <td>${user.register_time}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align: center">
+                <a id="save-user-info-changes" class="submit-btn"> 提交修改 </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<table id="user-change-password-tab" class="user-info-tabs" style="display: none;">
+    <thead>
+        <tr>
+            <th width="200"></th>
+            <th width="300"></th>
+            <th width="100"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <form>
+            <tr>
+                <td>原密码：</td>
+                <td>
+                    <input type="password" name="password_origin" class="" placeholder="原密码" required="required"/>
+                </td>
+                <td></td>
+            <tr>
+                <td>新密码：</td>
+                <td>
+                    <input type="password" name="password" class="" placeholder="新密码" required="required"/>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>重复新密码：</td>
+                <td>
+                    <input type="password" name="password_again" placeholder="重复一遍您的新密码" required="required"/>
+                </td>
+                <td></td>
+            </tr>
+            <td colspan="3" style="text-align: center">
+                <a id="save-password-changes" class="submit-btn"> 提交修改 </a>
+            </td>
+        </form>
+    </tbody>
+</table>
+<table id="user-change-head-tab" class="user-info-tabs" style="display: none;">
+    <tbody>
+        <form>
+            <tr>
+                <td>
+                    <img src="" alt=""/>            
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="file"/>
+                </td>
+            </tr>
+        </form>
+    </tbody>
+</table>
+

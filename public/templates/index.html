@@ -23,18 +23,18 @@
     <!--顶端消息栏-->
     <link rel="stylesheet" href="../stylesheets/topMessage.css"/>
 
+    <!--跳转-->
+    <script src="../javascripts/lib/jRouter.js"></script>
     <!--smalljq-->
     <script src="../javascripts/lib/iPtdqx.js"></script>
     <!--cookie-->
     <script src="../javascripts/lib/cookie.js"></script>
-    <!--跳转-->
-    <script src="../javascripts/lib/jRouter.js"></script>
     <!--ajax-->
     <script src="../javascripts/lib/ajax.min.js"></script>
-    <!--加载用户模块-->
-    <script src="../javascripts/Models/UserModel.js"></script>
     <!--路由跳转控制器-->
     <script src="../javascripts/Controllers/RouteController.js"></script>
+    <!--juicer模板引擎-->
+    <script src="../javascripts/lib/juicer.js"></script>
 </head>
 <body>
 <div class="full-screen moving-show-animate">
@@ -56,46 +56,95 @@
         </a><a class="nav-item" href="/group/">
             <span>小组</span>
             <i></i>
-        </a><a class="nav-item" id="search-bar" onmouseover="document.getElementById('search-nav').classList.add('show-menu-animate');">
+        </a><a class="nav-item" href="/search/">
             <span>搜索</span>
             <i></i>
         </a>
-            <ul id="search-nav" class="sub-nav" onmouseleave="document.getElementById('search-nav').classList.remove('show-menu-animate');" onblur="document.getElementById('search-nav').classList.remove('show-menu-animate');">
-                <li>
-                    <a href="#">搜题目</a>
-                </li>
-                <li>
-                    <a href="#">搜用户</a>
-                </li>
-                <li>
-                    <a href="#">搜比赛</a>
-                </li>
-                <li>
-                    <a href="#">搜小组</a>
-                </li>
-            </ul>
+            <!--<ul id="search-nav" class="sub-nav" onmouseleave="document.getElementById('search-nav').classList.remove('show-menu-animate');" onblur="document.getElementById('search-nav').classList.remove('show-menu-animate');">-->
+                <!--<li>-->
+                    <!--<a href="#">搜题目</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href="#">搜用户</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href="#">搜比赛</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href="#">搜小组</a>-->
+                <!--</li>-->
+            <!--</ul>-->
 
-            <ul class="nav-item unlog" id="user-bar" onmouseover="(function(){if(document.getElementById('user-bar').classList.contains('log')){document.getElementById('user-nav').classList.add('show-menu-animate');}})();">
-                <li class="user-btn"><a href="">我</a></li>
+            <ul class="nav-item unlog" id="user-bar" onmouseover="(function(){if(document.getElementById('user-bar').classList.contains('log')){document.getElementById('user-nav').classList.add('show-menu-animate');}})();"onmouseleave="document.getElementById('user-nav').classList.remove('show-menu-animate');" onblur="document.getElementById('user-nav').classList.remove('show-menu-animate');">
+                <li class="user-btn"><a>我</a></li>
                 <li class="login-btn"><a href="/login/">登录</a></li>
                 <li class="register-btn"><a href="/register/">注册</a></li>
                 <i></i>
+                <ul id="user-nav" class="sub-nav" >
+                    <li>
+                        <a class="user-name" href="/user/">用户名</a>
+                    </li>
+                    <li>
+                        <a href="/user/">用户设置</a>
+                    </li>
+                    <li>
+                        <a href="/logout/">登出</a>
+                    </li>
+                </ul>
             </ul>
 
-            <ul id="user-nav" class="sub-nav" onmouseleave="document.getElementById('user-nav').classList.remove('show-menu-animate');" onblur="document.getElementById('user-nav').classList.remove('show-menu-animate');">
-                <li>
-                    <a class="user-name">用户名</a>
-                </li>
-                <li>
-                    <a>用户设置</a>
-                </li>
-                <li>
-                    <a>登出</a>
-                </li>
-            </ul>
+
         </header>
-        <div id="banner" class="banner">
-            <a href="http://www.baidu.com" target="_blank">hehe</a>
+        <div id="main-section" class="main-section">
+            <!--用户信息模块-->
+            <div id="user-info-section" class="main-blocks">
+                主页
+            </div>
+            <!--题目列表模块-->
+            <div id="problem-list-section" class="main-blocks" >
+                题目列表
+            </div>
+            <!--题目信息模块，包含了讨论-->
+            <div id="problem-section" class="main-blocks" >
+                题目信息
+            </div>
+            <!--小组列表模块-->
+            <div id="group-list-section" class="main-blocks" >
+                小组列表模块
+            </div>
+            <!--小组信息模块，包含了小组的管理-->
+            <div id="group-section" class="main-blocks" >
+                小组信息模块
+            </div>
+            <!--比赛列表模块-->
+            <div id="contest-list-section" class="main-blocks" >
+                比赛列表
+            </div>
+            <!--比赛board，实时排名模块-->
+            <div id="contest-board-section" class="main-blocks" >
+                比赛board
+            </div>
+            <!--比赛提交列表模块，显示比赛中所有的提交及其状况-->
+            <div id="contest-submissions-section" class="main-blocks" >
+                比赛提交
+            </div>
+            <!--题目提交列表，包含了该题目历史上所有的提交-->
+            <div id="problem-submission-section" class="main-blocks" >
+                题目提交列表
+            </div>
+            <!--比赛信息模块，包含了题目列表，比赛说明，出题小组等内容-->
+            <div id="contest-section" class="main-blocks" >
+                比赛信息
+            </div>
+            <!--消息模块-->
+            <div id="message-section" class="main-blocks">
+                消息模块
+            </div>
+            <!--搜索结果-->
+            <div id="search-section" class="main-blocks">
+                搜索结果
+            </div>
+
         </div>
     </div>
 
@@ -111,6 +160,10 @@
         jRouter.parseAnchor();
         //setActiveLink();
         currentPagejRouter.initPage();
+        //TODO 向服务器取用户信息，取不到则设置参数为未登录的样式，取到的话创建用户对象
+        UserModel.prototype.checkIsLogin();
+
+
         //还有一个页面回调函数
         //alert('!!!');
         //alert(window.location.href);
@@ -164,10 +217,10 @@
     <div class="modal-window">
         <div class="modal-content">
             <form>
-                <input type="text" placeholder="用户名"/><span class="fa fa-user"></span>
-                <input type="password" class="error-input" placeholder="密码"/><span class="fa fa-lock"></span>
+                <input type="text" name="username" placeholder="用户名" required="required"/><span class="fa fa-user"></span>
+                <input type="password" name="password" class="" placeholder="密码" required="required"/><span class="fa fa-lock"></span>
             </form>
-            <a class="button" tabindex="0">登录</a>
+            <a class="button submit" tabindex="0">登录</a>
             <a href="/register/" class="register-link flat-link">前往注册~</a>
             <span>&nbsp;&nbsp;</span>
             <a href="/forgetPassword/" class="password-back-link flat-link">忘记密码？</a>
@@ -175,6 +228,7 @@
         </div>
     </div>
 </div>
+
 <div id="register-window" class="modal-background">
     <h1 class="modal-oj-title">Online Judge 4th</h1>
     <div class="left-intro">
@@ -186,13 +240,31 @@
     <div class="modal-window">
         <div class="modal-content">
             <form>
-                <input type="text" name="username" placeholder="用户名 / 学号"/><span class="fa fa-user"></span>
-                <input type="text" name="nickname" placeholder="输入您的昵称"><span class="fa fa-info-circle"></span>
-                <input type="email" name="email" placeholder="邮件地址，用于找回密码"/><span class="fa fa-envelope"></span>
-                <input type="password" name="password" class="error-input" placeholder="密码"/><span class="fa fa-lock"></span>
-                <input type="password" name="password-again" placeholder="重复一遍您的密码"/><span class="fa fa-lock"></span>
+                <input type="text" name="username" placeholder="用户名 / 学号" required="required"/><span class="fa fa-user"></span>
+                <input type="text" name="nickname" placeholder="输入您的昵称" required="required"><span class="fa fa-info-circle"></span>
+                <input type="email" name="email" placeholder="邮件地址，用于找回密码" required="required"/><span class="fa fa-envelope"></span>
+                <input type="password" name="password" class="" placeholder="密码,字母开头,长度6至18位" required="required"/><span class="fa fa-lock"></span>
+                <input type="password" name="password_again" placeholder="重复一遍您的密码" required="required"/><span class="fa fa-lock"></span>
             </form>
-            <a class="button" tabindex="0">注册</a>
+            <a class="button submit" tabindex="0">注册</a>
+            <a href="/login/"  class="flat-link">返回登陆</a>
+            <a href="/index/" class="flat-link">回到主页</a>
+        </div>
+    </div>
+</div>
+<div id="forget-password-window" class="modal-background">
+    <h1 class="modal-oj-title">Online Judge 4th</h1>
+    <div class="left-intro">
+        <img src="../images/intro.png" width="200" alt=""/>
+        <!--<img src="../images/mail.png" width="100" alt=""/>-->
+        <!--<h1>简洁 舒适<br/>评测机系统<br/>来到你身边</h1>-->
+    </div>
+    <div class="modal-window">
+        <div class="modal-content">
+            <form>
+                <input type="email" name="email" placeholder="您注册时填写的邮箱" required="required"/><span class="fa fa-envelope"></span>
+            </form>
+            <a class="button submit" tabindex="0">发送邮件</a>
             <a href="/login/"  class="flat-link">返回登陆</a>
             <a href="/index/" class="flat-link">回到主页</a>
         </div>
@@ -203,4 +275,19 @@
 <script src="../javascripts/lib/topMessage.js"></script>
 <!--注册控制器-->
 <script src="../javascripts/Controllers/registerController.js"></script>
+<!--登陆控制器-->
+<script src="../javascripts/Controllers/loginController.js"></script>
+<!--加载模块基类-->
+<script src="../javascripts/Models/Model.js"></script>
+<!--加载用户模块-->
+<script src="../javascripts/Models/UserModel.js"></script>
+
+<!--加载题目列表模块-->
+<script src="../javascripts/Models/ProblemListModle.js"></script>
+
+<!--用户信息视图控制器-->
+<!--需要注意的是 这里script如果直接用模板转义之后的innerHTML注入是没有用的，
+本着不造与业务无关的复杂轮子的思想，直接使用jQuery的html()和append()来写入转换后的模板代码-->
+<script src="../javascripts/Controllers/UserInfoController.js"></script>
+
 </html>

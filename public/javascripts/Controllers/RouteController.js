@@ -8,7 +8,17 @@ function setRouteController(){
         }else{
             jRouter(path).redirect('current');
         }
+
     };
+    window.hideMainSections = function()
+    {
+        var mainSections = document.getElementById('main-section').children;//强制其他版块消失
+        for(var i = 0; i < mainSections.length; i++)
+        {
+            mainSections[i]._css('display','none');
+        }
+    };
+    //主页
     jRouter().setRouter(
         {
             name:'index',
@@ -16,19 +26,21 @@ function setRouteController(){
             url:'/index/',
             fun:[
                 function(isReplace,path){
-                    jump(isReplace,'/index/');
+                    jump(isReplace,path);
                     if(document.getElementsByClassName('active-modal').length>0){
                         document.getElementsByClassName('active-modal')[0].classList.remove('active-modal');
                     }
                     //显示主体页
                     document.getElementsByClassName('full-screen')[0]._css('visibility','visible')._css('display','block');
                     setActiveLink();
-                    $('#banner').html('主页');
+                    $('.main-blocks').css({"display":"block"});
 
                 }
             ]
         }
     );
+
+    //题目
     jRouter().setRouter(
         {
             name:'problem',
@@ -36,22 +48,25 @@ function setRouteController(){
             url:'/problem/',
             fun:[
                 function(isReplace,path){
-                    jump(isReplace,'/problem/');
+                    jump(isReplace,path);
                     if(document.getElementsByClassName('active-modal').length>0){
                         document.getElementsByClassName('active-modal')[0].classList.remove('active-modal');
                     }
                     //显示主体页
                     document.getElementsByClassName('full-screen')[0]._css('visibility','visible')._css('display','block');
                     setActiveLink();
-                    var problemParams = currentPagejRouter.getUrlParam().params;
-                    $('#banner').html('题目 '+problemParams[1]);
+                    var problemParam = jRouter.getUrlParam(path).params[1];
+                    //TODO 补全参数解析部分
                     //setActiveLink();
-
+                    document.getElementById('problem-section').innerHTML ='题目 '+problemParam;
+                    hideMainSections();
+                    document.getElementById('problem-section')._css("display","block");
                 }
             ]
         }
 
     );
+    //比赛
     jRouter().setRouter(
         {
             name:'contest',
@@ -59,15 +74,17 @@ function setRouteController(){
             url:'/contest/',
             fun:[
                 function(isReplace,path){
-                    jump(isReplace,'/contest/');
+                    jump(isReplace,path);
                     if(document.getElementsByClassName('active-modal').length>0){
                         document.getElementsByClassName('active-modal')[0].classList.remove('active-modal');
                     }
                     //显示主体页
                     document.getElementsByClassName('full-screen')[0]._css('visibility','visible')._css('display','block');
-                    $('#banner').html('比赛');
                     setActiveLink();
                     //setActiveLink();
+                    //TODO 补全参数解析部分
+                    hideMainSections();
+                    document.getElementById('contest-section')._css("display","block");
 
                 }
             ]
@@ -81,15 +98,16 @@ function setRouteController(){
             url:'/message/',
             fun:[
                 function(isReplace,path){
-                    jump(isReplace,'/message/');
+                    jump(isReplace,path);
                     if(document.getElementsByClassName('active-modal').length>0){
                         document.getElementsByClassName('active-modal')[0].classList.remove('active-modal');
                     }
                     //显示主体页
                     document.getElementsByClassName('full-screen')[0]._css('visibility','visible')._css('display','block');
-                    $('#banner').html('消息');
                     setActiveLink();
                     //setActiveLink();
+                    hideMainSections();
+                    document.getElementById('message-section')._css("display","block");
                 }
             ]
         }
@@ -102,15 +120,16 @@ function setRouteController(){
             url:'/group/',
             fun:[
                 function(isReplace,path){
-                    jump(isReplace,'/group/');
+                    jump(isReplace,path);
                     if(document.getElementsByClassName('active-modal').length>0){
                         document.getElementsByClassName('active-modal')[0].classList.remove('active-modal');
                     }
                     //显示主体页
                     document.getElementsByClassName('full-screen')[0]._css('visibility','visible')._css('display','block');
-                    $('#banner').html('小组');
                     setActiveLink();
                     //setActiveLink();
+                    hideMainSections();
+                    document.getElementById('group-section')._css("display","block");
                 }
             ]
         }
@@ -124,7 +143,7 @@ function setRouteController(){
             fun:[
                 function(isReplace,path){
 
-                    jump(isReplace,'/register/');
+                    jump(isReplace,path);
                     //隐藏主体页
                     document.getElementsByClassName('full-screen')[0]._css('visibility','hidden')._css('display','none');
                     //隐藏正在显示的页
@@ -134,11 +153,16 @@ function setRouteController(){
                     jRouter.parseAnchor();
 
                     document.getElementById('register-window').classList.add('active-modal');
+                    //启动注册控制器，若没有的话则生成实例。
+                    if(typeof window.RegisterControllerEntity == 'undefined'){
+                        window.RegisterControllerEntity = new registerController();
+                    }
                 }
             ]
         }
 
     );
+    //登陆
     jRouter().setRouter(
         {
             name:'login',
@@ -146,7 +170,7 @@ function setRouteController(){
             url:'/login/',
             fun:[
                 function(isReplace,path){
-                    jump(isReplace,'/login/');
+                    jump(isReplace,path);
                     //隐藏主体页
                     document.getElementsByClassName('full-screen')[0]._css('visibility','hidden')._css('display','none');
                     //隐藏正在显示的页
@@ -155,6 +179,83 @@ function setRouteController(){
                     }
                     jRouter.parseAnchor();
                     document.getElementById('login-window').classList.add('active-modal');
+                    //启动登陆控制器，若没有的话则生成实例。
+                    if(typeof window.LoginControllerEntity == 'undefined'){
+                        window.LoginControllerEntity = new loginController();
+                    }
+                    //将cookie中存储的用户名写入input中
+                    window.LoginControllerEntity.getInput('username').value = cookieMethods.getCookie('username')
+                }
+            ]
+        }
+
+    );
+    //忘记密码
+    jRouter().setRouter(
+        {
+            name:'forgetPassword',
+            type:'get',
+            url:'/forgetPassword/',
+            fun:[
+                function(isReplace,path){
+                    jump(isReplace,path);
+                    //隐藏主体页
+                    document.getElementsByClassName('full-screen')[0]._css('visibility','hidden')._css('display','none');
+                    //隐藏正在显示的页
+                    if(document.getElementsByClassName('active-modal').length>0){
+                        document.getElementsByClassName('active-modal')[0].classList.remove('active-modal');
+                    }
+                    jRouter.parseAnchor();
+                    document.getElementById('forget-password-window').classList.add('active-modal');
+                }
+            ]
+        }
+
+    );
+    //登出
+    jRouter().setRouter(
+        {
+            name:'log',
+            type:'get',
+            url:'/logout/',
+            fun:[
+                function(isReplace,path){
+                    window.currentUser.logout();
+                }
+            ]
+        }
+
+    );
+    //忘记密码
+    jRouter().setRouter(
+        {
+            name:'user',
+            type:'get',
+            url:'/user/',
+            fun:[
+                function(isReplace,path){
+
+                    if(document.getElementsByClassName('active-modal').length>0){
+                        document.getElementsByClassName('active-modal')[0].classList.remove('active-modal');
+                    }
+                    //显示主体页
+                    document.getElementsByClassName('full-screen')[0]._css('visibility','visible')._css('display','block');
+                    setActiveLink();
+                    //
+                    var userParam = jRouter.getUrlParam(path).params;
+                    if(userParam.length == 1){//参数长度只有1
+                        //说明是默认  本用户
+                        hideMainSections();
+                        window.currentUser.showCurrentUserInfo();
+                        UserInfoController.bind();
+                    }
+                    else{
+                        //说明是某个具体用户的
+                        //TODO 补全用户名解析部分
+                    }
+                    jump(isReplace,path);
+                    //$('#main-section').html('题目 '+problemParam);
+                    //setActiveLink();
                 }
             ]
         }
@@ -206,3 +307,4 @@ jRouter.setRouterStates({
     }
 
 });
+

@@ -1,0 +1,47 @@
+{
+  "status":1,
+  "problems":[
+    {
+      "id":1,
+      "title":"题目1",
+      "description": "题目的内容很长啊!",
+      "test_setting":
+      {
+        "time_limit":700,
+        "round":5
+      },
+      "access_level":2,
+      "creater_id": 11111,
+      "belong_group": 2,
+      "lastedit_time":2
+    },
+    {
+      "id":2,
+      "title":"题目2",
+      "description": "题目的内容很长啊!",
+      "test_setting":
+      {
+        "time_limit":700,
+        "round":5
+      },
+      "access_level":2,
+      "creater_id": 22222,
+      "belong_group": 2,
+      "lastedit_time":2
+    },
+    {
+      "id":3,
+      "title":"题目3",
+      "description": "题目的内容很长啊!",
+      "test_setting":
+      {
+        "time_limit":700,
+        "round":5
+      },
+      "access_level":2,
+      "creater_id": 33333,
+      "belong_group": 2,
+      "lastedit_time":2
+    }
+  ]
+}

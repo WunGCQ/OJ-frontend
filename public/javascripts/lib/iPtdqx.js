@@ -63,33 +63,6 @@ if(Node){
 
 
 
-
-var cookie_methods ={};
-//JS操作cookies方法!
-//写cookies
-cookie_methods.set_cookie = function (name,value) {
-    var Days = 30;
-    var exp = new Date();
-    exp.setTime(exp.getTime() + Days*24*60*60*1000);
-    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
-};
-//读取cookies
-cookie_methods.get_cookie = function(name) {
-    var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
-    if(arr=document.cookie.match(reg)) return unescape(arr[2]);
-    else return null;
-};
-//删除cookies
-cookie_methods.delCookie = function(name) {
-    var exp = new Date();
-    exp.setTime(exp.getTime() - 1);
-    var cval=getCookie(name);
-    if(cval!=null) document.cookie= name + "="+cval+";expires="+exp.toGMTString();
-};
-//使用示例
-cookie_methods.set_cookie("name","hayden");
-//alert(cookie_methods.get_cookie("name"));
-
 function load_picture(src){
     var pic = new Image();
     //pic.src = "http://b.zol-img.com.cn/desk/bizhi/image/6/2560x1600/1423190828665.jpg";

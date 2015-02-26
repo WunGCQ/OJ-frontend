@@ -39,7 +39,7 @@ window.cookieMethods = {};
     cookieMethods.delCookie = function(name) {
         var exp = new Date();
         exp.setTime(exp.getTime() - 1);
-        var cval=getCookie(name);
+        var cval = cookieMethods.getCookie(name);
         if(cval!=null) document.cookie= name + "="+cval+";expires="+exp.toGMTString();
     };
 //使用示例

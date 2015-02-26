@@ -1,0 +1,24 @@
+
+    <h2>所有题目</h2>
+    <table>
+        <thead>
+            <tr>
+                <th width="10%">编号</th>
+                <th width="50%">名称</th>
+                <th width="15%">小组</th>
+                <th width="10%">提交代码</th>
+                <th width="15%">提交/通过</th>
+            </tr>
+        </thead>
+        <tbody>
+        {@each problems as problem}
+            <tr>
+                <td> ${problem.id} </td>
+                <td> ${problem.title} </td>
+                <td> ${problem.belong_group} </td>
+                <td><i>提交</i></td>
+                <td><span>1</span> / <span>1</span></td>
+            </tr>
+        {@/each}
+        </tbody>
+    </table>

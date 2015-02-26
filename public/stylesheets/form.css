@@ -5,6 +5,7 @@ form {
     width: calc(100% - 10px);
     margin: auto;
     padding-top: 5px;
+    font-family: "Microsoft YaHei", "Microsoft Yahei", "微软雅黑", "", "Courier New", "Helvetica Neue", Courier, monospace;
 
 }
 input[type="text"],
@@ -25,6 +26,8 @@ input[type="email"]{
     box-shadow: none;
     transition: all 0.5s ease;
     outline: none;
+    font-family: "Microsoft YaHei","Microsoft Yahei","微软雅黑",Helvetica Neue, Helvetica, Arial,"Helvetica Neue","Courier New", Courier;
+
 }
 
 /*注意这里的fa时宽度较大与input不在同一行所以input的margin-top作用于.fa上了，
@@ -40,16 +43,26 @@ form .fa {
     transition: all 0.375s ease;
     color: #DCE4EC;
 }
-input:focus,input:hover {
+input:hover{
+    border-color: #8fd5c2;
+}
+input:focus{
     border-color: #1ABC9C;
 }
-input:focus + .fa,input:hover + .fa {
+input:hover + .fa{
+    color: #8fd5c2;
+}
+input:focus + .fa{
     color: #1ABC9C;
 }
 /*出错的标记*/
 .error-input {
     border-color:#e74c3c!important;
     color: #e74c3c!important;
+    animation:shake 0.5s;
+    -moz-animation:shake 0.5s; /* Firefox */
+    -webkit-animation:shake 0.5s; /* Safari and Chrome */
+    -o-animation:shake 0.5s; /* Opera */
 }
 .error-input +.fa{
     color: #e74c3c ;

@@ -49,7 +49,7 @@
     box-shadow: inset 0 0 10px 3px rgba(0, 0, 0, .075);
     transition: all 0.3s linear;
 }
-#nav .nav-item {
+#nav a.nav-item  {
     display: inline-block;
     position: relative;
     vertical-align: top;
@@ -122,23 +122,29 @@
 
 .sub-nav {
     display: none;
+    /*display: block;*/
     position: absolute;
-    margin-top: 10px;
+    margin-top: -5px;
     margin-left: 0;
     background-color: #34495e;
+    background-color: #2C3E50;
     width: 100px;
     padding: 5px 3px;
-    border-radius: 2px;
+    line-height: 0;
 }
 .sub-nav li {
     width: calc(100% - 10px);
+    height: 30px;
     padding: 5px;
+    line-height: 30px;
     border-radius: 3px;
     transition: all 0.3s ease-out 0s;
 }
 .sub-nav li a {
     display: block;
     width: 100%;
+    height: 30px;
+    line-height: 30px;
     color: #fff;
     text-indent: 1em;
 }
@@ -148,24 +154,10 @@
 .sub-nav li:hover {
     background-color: #1ABC9C;
 }
-.sub-nav:before {
-    content: "";
-    border-style: solid;
-    border-width: 0 9px 9px;
-    border-color: transparent transparent #34495E;
-    height: 0;
-    position: absolute;
-    left: 15px;
-    top: -9px;
-    width: 0;
-}
 
 
-#search-nav {
-    margin-left: 590px;
-}
+
 #user-bar {
-
     display: block;
     position: relative;
     float:right;
@@ -173,17 +165,16 @@
 #user-bar li{
     display: inline-block;
 }
+
 #user-bar a {
     color:#fff !important;
     cursor: pointer;
+    line-height: 60px;
+}
 
-}
 #user-bar a:hover {
-    color: #1abc9c;
-}
-#user-bar a:hover {
-    color: #1cedcb !important;
-    border-bottom: 1px solid #1cedcb;
+    /*color: #1cedcb !important;*/
+    /*border-bottom: 1px solid #1cedcb;*/
 }
 #user-bar.log {
     width:70px !important;
@@ -198,18 +189,21 @@
     display: none;
 }
 #user-nav {
-    right: 3px;
+    right: 0px;
 }
-#user-nav:before {
-    content: "";
-    border-style: solid;
-    border-width: 0 9px 9px;
-    border-color: transparent transparent #34495E;
-    height: 0;
-    position: absolute;
-    right: 40px;
-    left: inherit;
-    top: -9px;
-    width: 0;
+#user-nav a{
+    line-height: 30px;
 }
+/*#user-nav:before {*/
+    /*content: "";*/
+    /*border-style: solid;*/
+    /*border-width: 0 9px 9px;*/
+    /*border-color: transparent transparent #34495E;*/
+    /*height: 0;*/
+    /*position: absolute;*/
+    /*right: 40px;*/
+    /*left: inherit;*/
+    /*top: -9px;*/
+    /*width: 0;*/
+/*}*/
 
