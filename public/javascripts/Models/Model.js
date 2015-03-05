@@ -26,7 +26,7 @@ Model.prototype.getTemplateUrl = function()
 
 //增
 Model.prototype.AddPath = null;
-Model.prototype.Addmethod = 'GET';
+Model.prototype.Addmethod = 'POST';
 Model.prototype.getAddPath = function()
 {
     return {
@@ -37,7 +37,7 @@ Model.prototype.getAddPath = function()
 //删
 
 Model.prototype.RemovePath = null;
-Model.prototype.Removemethod = 'GET';
+Model.prototype.Removemethod = 'POST';
 Model.prototype.getRemovePath = function()
 {
     return {
@@ -47,7 +47,7 @@ Model.prototype.getRemovePath = function()
 };
 //改
 Model.prototype.UpdatePath = null;
-Model.prototype.Updatemethod = 'GET';
+Model.prototype.Updatemethod = 'POST';
 Model.prototype.getUpdatePath = function()
 {
     return {
@@ -57,7 +57,7 @@ Model.prototype.getUpdatePath = function()
 };
 //查
 Model.prototype.RetrievePath = null;
-Model.prototype.Retrievemethod = 'GET';
+Model.prototype.Retrievemethod = 'POST';
 Model.prototype.getRetrievePath = function()
 {
     return {
@@ -72,21 +72,31 @@ Model.prototype.loadTemplate = function()
     var temp = this;
     if(templateHTML == null)
     {
-        ajax.send(
-            {
-                url: this.getTemplateUrl(),
-                data: null,
-                type: 'GET',
-                async:false ,//阻塞异步
-                dataType: "html",
-                success: function(template)
+        var templateInLocalStorage = localStorage.getItem(this.templatePath);
+        if(templateInLocalStorage == null  ){//localStorage没有找到模板，则ajax请求
+            ajax.send(
                 {
-                    templateHTML = template;
-                    temp.template = template.replace(/[\r\n]/g,"");
-                    return templateHTML;
+                    url: this.getTemplateUrl(),
+                    data: null,
+                    type: 'GET',
+                    async:false ,//阻塞异步
+                    dataType: "html",
+                    success: function(template)
+                    {
+                        templateHTML = template;
+                        temp.template = template.replace(/[\r\n]/g,"");
+                        localStorage.setItem(temp.templatePath,temp.template.toString());
+                        localStorage.setItem(temp.templatePath+".Version",window.templateVersionInfo[temp.templatePath]);//版本号对齐
+                        return templateHTML;
+                    }
                 }
-            }
-        );
+            );
+        }
+        else{
+            this.template = templateInLocalStorage;
+            return templateInLocalStorage;
+        }
+
     }
     else
     {
@@ -116,6 +126,52 @@ Model.prototype.UPDATE = function(sendData)
 {
 
 };
+
+
+Model.prototype.renderPage = function()
+{
+    var templateHTML = this.getTemplateText();
+    var temp = this;
+    if(templateHTML == null)
+    {
+        var templateInLocalStorage = localStorage.getItem(this.templatePath);
+        if(templateInLocalStorage == null){//localStorage没有找到模板，则ajax请求
+            ajax.send(
+                {
+                    url: this.getTemplateUrl(),
+                    data: null,
+                    type: 'GET',
+                    async:false ,//阻塞异步
+                    dataType: "html",
+                    success: function(template)
+                    {
+                        templateHTML = template;
+                        temp.template = template.replace(/[\r\n]/g,"");
+                        localStorage.setItem(temp.templatePath,temp.template.toString());
+                        var text = juicer(temp.template,temp.modelData);
+                        return text;
+                    }
+                }
+            );
+        }
+        else{
+            this.template = templateInLocalStorage;
+            var text = juicer(templateInLocalStorage ,this.modelData);
+            return text;
+        }
+
+    }
+    else
+    {
+        var text = juicer(this.template,this.modelData);
+        return text;
+    }
+};
+//Model.prototype.renderPage = function(){
+//    var template = this.getTemplateText();
+//
+//    return text;
+//};
 
 //改用juicer模板引擎
 Model.prototype.renderer = juicer;

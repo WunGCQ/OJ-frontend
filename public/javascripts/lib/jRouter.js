@@ -372,7 +372,7 @@
         {
             var Anchors = document.getElementsByTagName('a');//遍历DOM找到所有a标签
         }
-        else if(Anchor instanceof Array)
+        else if(Anchor instanceof Array || Anchor instanceof HTMLCollection || Anchor instanceof NodeList)//getElementsBy* 返回类型需要注意 todo safari下是NodeList 但是chrome是 HTMLCollection
         {   //如果是节点数组的话
             var Anchors = Anchor;
         }

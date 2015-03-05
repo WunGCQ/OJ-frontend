@@ -1,0 +1,110 @@
+<style>
+    .time-selector>div{
+        display: inline-block;
+    }
+</style>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span>赛事名称</span>
+                </td>
+                <td>
+                    <input type="text" required="required" placeholder="输入赛事名称"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>小组</span>
+                </td>
+                <td>
+                    <span>小组名称</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>开始时间</span>
+                </td>
+                <td class="time-selector">
+                    <div>
+                        <select name="begin-year" id="contest-begin-year"></select>
+                    </div>
+                    <div>年</div>
+                    <div>
+                        <select name="begin-month" id="contest-begin-month"></select>
+                    </div>
+                    <div>月</div>
+                    <div>
+                        <select name="begin-day" id="contest-begin-day"></select>
+                    </div>
+                    <div>日</div>
+                    <div>
+                        <select name="begin-hour" id="contest-begin-hour"></select>
+                    </div>
+                    <div>时</div>
+                    <div>
+                        <select name="begin-minute" id="contest-begin-minute"></select>
+                    </div>
+                    <div>分</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>结束时间</span>
+                </td>
+                <td class="time-selector">
+                    <div>
+                        <select name="end-year" id="contest-end-year"></select>
+                    </div>
+                    <div>年</div>
+                    <div>
+                        <select name="end-month" id="contest-end-month"></select>
+                    </div>
+                    <div>月</div>
+                    <div>
+                        <select name="end-day" id="contest-end-day"></select>
+                    </div>
+                    <div>日</div>
+                    <div>
+                        <select name="end-hour" id="contest-end-hour"></select>
+                    </div>
+                    <div>时</div>
+                    <div>
+                        <select name="end-minute" id="contest-end-minute"></select>
+                    </div>
+                    <div>分</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>赛事描述</span>
+                </td>
+                <td>
+                    <div contenteditable="true">
+                        在此处添加你的赛事描述
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>解题报告链接</span>
+                </td>
+                <td>
+                    <input type="url" placeholder="在此输入解题报告的链接"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <a role="button">创建题目</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

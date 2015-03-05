@@ -206,4 +206,10 @@
     /*top: -9px;*/
     /*width: 0;*/
 /*}*/
-
+/*时间块*/
+#time-wrapper {
+    line-height: 62px;
+    color: #ccc;
+    overflow: hidden;
+    font-size: 80%;
+}

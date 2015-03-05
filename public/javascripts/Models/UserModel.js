@@ -1,8 +1,8 @@
 window.UserModel = function(UserData)
 {
-    if(typeof this.UserData == "undefined" && typeof UserData != "undefined")
+    if(typeof this.modelData == "undefined" && typeof UserData != "undefined")
     {
-        this.UserData = UserData;
+        this.modelData = {'user':UserData};
         this.init(UserData);
 
     }
@@ -21,19 +21,20 @@ UserModel.prototype = new Model();
 (
     function()
     {
-        UserModel.prototype.templatePath = 'http://wungcq.github.io/public/templates/user.html';
-        UserModel.prototype.AddPath      = 'http://wungcq.github.io/public/JSON/register.json';
-        UserModel.prototype.RetrievePath = 'http://wungcq.github.io/public/JSON/get_user.json';
-        UserModel.prototype.UpdatePath   = 'http://wungcq.github.io/public/JSON/update_user.json';
-        UserModel.prototype.LoginPath    = 'http://wungcq.github.io/public/JSON/login.json';
-        UserModel.prototype.LogoutPath   = 'http://wungcq.github.io/public/JSON/logout.json';
-        UserModel.prototype.Retrievemethod = 'GET';
+        UserModel.prototype.templatePath = 'http://localhost:63342/github/ngtest/public/templates/user.html';
+        UserModel.prototype.AddPath      = 'http://localhost:63342/github/ngtest/public/JSON/register.json';
+        UserModel.prototype.RetrievePath = 'http://localhost:63342/github/ngtest/public/JSON/get_user.json';
+        UserModel.prototype.UpdatePath   = 'http://localhost:63342/github/ngtest/public/JSON/update_user.json';
+        UserModel.prototype.LoginPath    = 'http://localhost:63342/github/ngtest/public/JSON/login.json';
+        UserModel.prototype.LogoutPath   = 'http://localhost:63342/github/ngtest/public/JSON/logout.json';
+        UserModel.prototype.UpdatePWDPath   = 'http://localhost:63342/github/ngtest/public/JSON/update_password.json';
     }
 )();
 
 UserModel.prototype.init = function(UserData){
-    var UserData = UserData||this.UserData;
+    var UserData = UserData||this.modelData;
     if(typeof UserData != "undefined"){
+        this.id         = UserData.id;
         this.username   = UserData.username;
         this.nickname   = UserData.nickname;
         this.student_id = UserData.student_id;
@@ -116,7 +117,7 @@ UserModel.prototype.logout = function()
             {
                 url: UserModel.prototype.LogoutPath,
                 data: data,
-                type: 'GET',
+                type: 'POST',
                 dataType: "json",
                 success: function(Data)
                 {
@@ -205,22 +206,112 @@ UserModel.prototype.RETRIEVE = function(arg)
         }
     );
 };
-
-//资料面板
-UserModel.prototype.showCurrentUserInfo = function()
+UserModel.prototype.renderUserInfo  = function()
 {
     //如果还没加载过这个模块
     if(!this.isUserInfoShown){
         //由于UserModel的构造函数决定了一定已经有模板了
-        var text = juicer(this.getTemplateText(),{user:this.UserData});
+        var text = juicer(this.getTemplateText(),{user:this.modelData});
         //document.getElementById('user-info-section').innerHTML = text;
         $('#user-info-section').html(text);
         this.isUserInfoShown = true;
     }
-    //如果已经加载过这个模块
-    else{
-        //就不用做这些破事儿了
-    }
+};
+//资料面板
+UserModel.prototype.showCurrentUserInfo = function()
+{
+    this.renderUserInfo();
     document.getElementById('user-info-section').style["display"] = "block";
     return;
+};
+
+//更新用户信息
+UserModel.prototype.UPDATE = function(arg)
+{
+    if( typeof arg == 'undefined'){
+        var data = null;
+    }else{
+        var data = arg;
+    }
+
+    ajax.send(
+        {
+            url: UserModel.prototype.UpdatePath,
+            data: data,
+            type: UserModel.prototype.Updatemethod,
+            dataType: "json",
+            success: function(Data)
+            {
+                if(Data.status==1)
+                {
+                    window.currentUser = new UserModel(Data.user);
+                    window.currentUser.writeCookie(Data.user.username);
+                    //TODO 后续工作包括了渲染用户设置的模板，用户下拉菜单等
+                    topMessage({
+                        Message:'修改成功~',
+                        Type:'success'
+                    });
+                    //同时再更新一下用户信息
+                    window.currentUser.renderUserInfo();
+                }
+                else
+                {
+                    topMessage({
+                        Message:Data.error,
+                        Type:'fail'
+                    });
+                }
+            },
+            fail:function(){
+                topMessage({
+                    Message:'服务器连接异常，请检查网络或稍后重试',
+                    Type:'fail'
+                });
+            }
+        }
+    );
+};
+//更新用户信息
+UserModel.prototype.UPDATEPASSWORD = function(arg)
+{
+    if( typeof arg == 'undefined'){
+        var data = null;
+    }else{
+        var data = arg;
+    }
+
+    ajax.send(
+        {
+            url: UserModel.prototype.UpdatePWDPath,
+            data: data,
+            type: UserModel.prototype.Updatemethod,
+            dataType: "json",
+            success: function(Data)
+            {
+                if(Data.status==1)
+                {
+                    //window.currentUser = new UserModel(Data.user);
+                    //window.currentUser.writeCookie(Data.user.username);
+                    topMessage({
+                        Message:'修改成功~',
+                        Type:'success'
+                    });
+
+                }
+                else
+                {
+                    topMessage({
+                        Message:Data.error,
+                        Type:'fail'
+                    });
+                }
+            },
+            fail:function(){
+                topMessage({
+                    Message:'服务器连接异常，请检查网络或稍后重试',
+                    Type:'fail'
+                });
+            }
+        }
+    );
 };

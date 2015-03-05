@@ -1,6 +1,6 @@
 
         <article>
-            <h2 ${problem.title} </h2>
+            <h2> ${problem.title}</h2>
             <input type="hidden" data-problem-id="{problem.id}"/>
             <span>编号: ${problem.id}</span>
             <span>作者：${problem.creater_id}</span>
@@ -9,10 +9,13 @@
             <div class="test_setting">
                 <p>
                     <!--TODO 需要搞明白test_setting 具体格式-->
-                    ${problem.test_setting}
+                    <span>时间限制: ${problem.test_setting.time_limit}</span>
+                    <span>测试轮数: ${problem.test_setting.round}</span>
                 </p>
             </div>
             <section>
-                ${problem.description}
+                $${problem.description}
             </section>
+            <a href="">提交答案</a>
+            <a>查看讨论</a>
         </article>

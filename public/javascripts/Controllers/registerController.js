@@ -130,9 +130,9 @@ var registerController = function(){
         console.log('准备发送注册数据');
         ajax.send(
             {
-                url: 'http://wungcq.github.io/public/JSON/register.json',
+                url: 'http://localhost:63342/github/ngtest/public/JSON/register.json',
                 data: this.registerData,
-                type: 'GET',
+                type: 'POST',
                 dataType: "json",
                 success: function(data)
                 {

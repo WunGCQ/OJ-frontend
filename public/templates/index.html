@@ -24,17 +24,19 @@
     <link rel="stylesheet" href="../stylesheets/topMessage.css"/>
 
     <!--跳转-->
-    <script src="../javascripts/lib/jRouter.js"></script>
+    <script src="../JavaScripts/lib/jRouter.js"></script>
     <!--smalljq-->
-    <script src="../javascripts/lib/iPtdqx.js"></script>
+    <script src="../JavaScripts/lib/iPtdqx.js"></script>
     <!--cookie-->
-    <script src="../javascripts/lib/cookie.js"></script>
+    <script src="../JavaScripts/lib/cookie.js"></script>
     <!--ajax-->
-    <script src="../javascripts/lib/ajax.min.js"></script>
+    <script src="../JavaScripts/lib/ajax.min.js"></script>
+    <!--模板的版本控制-->
+    <script src="../JavaScripts/lib/checkTemplateUpdate.js"></script>
     <!--路由跳转控制器-->
-    <script src="../javascripts/Controllers/RouteController.js"></script>
+    <script src="../JavaScripts/Controllers/RouteController.js"></script>
     <!--juicer模板引擎-->
-    <script src="../javascripts/lib/juicer.js"></script>
+    <script src="../JavaScripts/lib/juicer.js"></script>
 </head>
 <body>
 <div class="full-screen moving-show-animate">
@@ -44,7 +46,7 @@
             <a class="nav-item" href="/index/">
                 <span>主页</span>
                 <i></i>
-            </a><a class="nav-item" href="/problem/2">
+            </a><a class="nav-item" href="/problems/">
             <span>题目</span>
             <i></i>
         </a><a class="nav-item" href="/contest/">
@@ -53,27 +55,13 @@
         </a><a class="nav-item" href="/message/">
             <span>消息</span>
             <i></i>
-        </a><a class="nav-item" href="/group/">
+        </a><a class="nav-item" href="/groupList/">
             <span>小组</span>
             <i></i>
         </a><a class="nav-item" href="/search/">
             <span>搜索</span>
             <i></i>
         </a>
-            <!--<ul id="search-nav" class="sub-nav" onmouseleave="document.getElementById('search-nav').classList.remove('show-menu-animate');" onblur="document.getElementById('search-nav').classList.remove('show-menu-animate');">-->
-                <!--<li>-->
-                    <!--<a href="#">搜题目</a>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<a href="#">搜用户</a>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<a href="#">搜比赛</a>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<a href="#">搜小组</a>-->
-                <!--</li>-->
-            <!--</ul>-->
 
             <ul class="nav-item unlog" id="user-bar" onmouseover="(function(){if(document.getElementById('user-bar').classList.contains('log')){document.getElementById('user-nav').classList.add('show-menu-animate');}})();"onmouseleave="document.getElementById('user-nav').classList.remove('show-menu-animate');" onblur="document.getElementById('user-nav').classList.remove('show-menu-animate');">
                 <li class="user-btn"><a>我</a></li>
@@ -92,13 +80,24 @@
                     </li>
                 </ul>
             </ul>
-
+            <a id="time-wrapper">
+                <span id="time-now"></span>
+                <script>
+                    (function showTimeOnHeader(){
+                        setInterval(function(){
+                            var timeNow = new Date().toLocaleString();
+                            document.getElementById("time-now").innerHTML = timeNow;
+                        },1000);
+                    })();
+                </script>
+            </a>
 
         </header>
         <div id="main-section" class="main-section">
             <!--用户信息模块-->
             <div id="user-info-section" class="main-blocks">
                 主页
+                <a href=""></a>
             </div>
             <!--题目列表模块-->
             <div id="problem-list-section" class="main-blocks" >
@@ -161,16 +160,10 @@
         //setActiveLink();
         currentPagejRouter.initPage();
         //TODO 向服务器取用户信息，取不到则设置参数为未登录的样式，取到的话创建用户对象
+        checkTemplateUpdate();
         UserModel.prototype.checkIsLogin();
 
 
-        //还有一个页面回调函数
-        //alert('!!!');
-        //alert(window.location.href);
-
-        //currentPagejRouter.loadTemplate();
-        //currentPagejRouter.loadModelData();
-        //initUserModel();
     };
     window.addEventListener('popstate', function(e) {
         if (e.state) {
@@ -184,14 +177,7 @@
         }
         // 当然也可以直接使用history.state来获取当前对应的state数据。
     });
-//    window.onpopstate = function(state){
-//        console.log(history.state);
-//        window.currentPagejRouter = jRouter(window.location.href);
-//        setRouteController();
-//        //currentPagejRouter.initPage();
-//        jRouter.parseAnchor();
-//
-//    };
+
 
 
 
@@ -203,8 +189,8 @@
 
 
 <!--jq-->
-<script src="../javascripts/lib/jquery-1.10.0.js"></script>
-<script src="../javascripts/Models/Model.js"></script>
+<script src="../JavaScripts/lib/jquery-1.10.0.js"></script>
+<script src="../JavaScripts/Models/Model.js"></script>
 </body>
 <div id="login-window" class="modal-background">
     <h1 class="modal-oj-title">Online Judge 4th</h1>
@@ -272,22 +258,34 @@
 </div>
 
 <!--组件 顶端消息栏-->
-<script src="../javascripts/lib/topMessage.js"></script>
+<script src="../JavaScripts/lib/topMessage.js"></script>
 <!--注册控制器-->
-<script src="../javascripts/Controllers/registerController.js"></script>
+<script src="../JavaScripts/Controllers/registerController.js"></script>
 <!--登陆控制器-->
-<script src="../javascripts/Controllers/loginController.js"></script>
+<script src="../JavaScripts/Controllers/loginController.js"></script>
 <!--加载模块基类-->
-<script src="../javascripts/Models/Model.js"></script>
+<script src="../JavaScripts/Models/Model.js"></script>
 <!--加载用户模块-->
-<script src="../javascripts/Models/UserModel.js"></script>
+<script src="../JavaScripts/Models/UserModel.js"></script>
 
 <!--加载题目列表模块-->
-<script src="../javascripts/Models/ProblemListModle.js"></script>
+<script src="../JavaScripts/Models/ProblemListModel.js"></script>
+<!--加载题目列表控制器-->
+<script src="../JavaScripts/Controllers/problemListController.js"></script>
+<!--加载题目模块-->
+<script src="../JavaScripts/Models/ProblemModel.js"></script>
+<!--题目视图控制器-->
+<script src="../JavaScripts/Controllers/problemController.js"></script>
+
+<!--加载小组列表模块-->
+<script src="../JavaScripts/Models/GroupListModel.js"></script>
+<!--加载小组列表视图控制器-->
+<script src="../JavaScripts/Controllers/groupListController.js"></script>
+
 
 <!--用户信息视图控制器-->
 <!--需要注意的是 这里script如果直接用模板转义之后的innerHTML注入是没有用的，
 本着不造与业务无关的复杂轮子的思想，直接使用jQuery的html()和append()来写入转换后的模板代码-->
-<script src="../javascripts/Controllers/UserInfoController.js"></script>
+<script src="../JavaScripts/Controllers/userInfoController.js"></script>
 
 </html>

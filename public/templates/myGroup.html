@@ -1,0 +1,33 @@
+<style>
+    #my-groups{
+        margin: auto;
+    }
+    #my-groups td[colspan="5"]{
+        text-align: center;
+    }
+</style>
+<table id="my-groups">
+    <thead>
+    <tr>
+        <th>编号</th>
+        <th>名称</th>
+        <th>赛事数量</th>
+        <th>题目数量</th>
+        <th>成员数量</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td colspan="5">所有小组</td>
+    </tr>
+    {@each content as group}
+    <tr>
+        <td>${group.group_id}</td>
+        <td><a href="/group/${group.group_id}">${group.name}</a></td>
+        <td>${group.contest_count}</td>
+        <td>${group.problem_count}</td>
+        <td>${group.member_count}</td>
+    </tr>
+    {@/each}
+    </tbody>
+</table>

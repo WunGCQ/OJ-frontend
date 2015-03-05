@@ -8,7 +8,6 @@ function setRouteController(){
         }else{
             jRouter(path).redirect('current');
         }
-
     };
     window.hideMainSections = function()
     {
@@ -40,7 +39,31 @@ function setRouteController(){
         }
     );
 
-    //题目
+    //题目列表
+    jRouter().setRouter(
+        {
+            name:'problems',
+            type:'get',
+            url:'/problems/',
+            fun:[
+                function(isReplace,path){
+                    jump(isReplace,path);
+                    if(document.getElementsByClassName('active-modal').length>0){
+                        document.getElementsByClassName('active-modal')[0].classList.remove('active-modal');
+                    }
+                    //显示主体页
+                    document.getElementsByClassName('full-screen')[0]._css('visibility','visible')._css('display','block');
+                    hideMainSections();
+                    setActiveLink();
+                    var problemListPageParam =  jRouter.getUrlParam(path).params[1] - 0;
+                    window.problemListController.showProblemList(problemListPageParam);
+                    document.getElementById('problem-list-section')._css("display","block");
+                }
+            ]
+        }
+
+    );
+    //题目列表
     jRouter().setRouter(
         {
             name:'problem',
@@ -57,9 +80,9 @@ function setRouteController(){
                     setActiveLink();
                     var problemParam = jRouter.getUrlParam(path).params[1];
                     //TODO 补全参数解析部分
-                    //setActiveLink();
-                    document.getElementById('problem-section').innerHTML ='题目 '+problemParam;
                     hideMainSections();
+                    //显示内容
+                    problemController.showProblem(problemParam);
                     document.getElementById('problem-section')._css("display","block");
                 }
             ]
@@ -115,9 +138,9 @@ function setRouteController(){
     );
     jRouter().setRouter(
         {
-            name:'group',
+            name:'groupList',
             type:'get',
-            url:'/group/',
+            url:'/groupList/',
             fun:[
                 function(isReplace,path){
                     jump(isReplace,path);
@@ -126,10 +149,12 @@ function setRouteController(){
                     }
                     //显示主体页
                     document.getElementsByClassName('full-screen')[0]._css('visibility','visible')._css('display','block');
+                    var groupListPageParam =  jRouter.getUrlParam(path).params[1] - 0;
                     setActiveLink();
                     //setActiveLink();
                     hideMainSections();
-                    document.getElementById('group-section')._css("display","block");
+                    window.groupListController.showGroupList(groupListPageParam);
+                    //document.getElementById('group-section')._css("display","block");
                 }
             ]
         }
@@ -210,7 +235,6 @@ function setRouteController(){
                 }
             ]
         }
-
     );
     //登出
     jRouter().setRouter(
@@ -246,7 +270,7 @@ function setRouteController(){
                     if(userParam.length == 1){//参数长度只有1
                         //说明是默认  本用户
                         hideMainSections();
-                        window.currentUser.showCurrentUserInfo();
+                        UserInfoController.showCurrentUserInfo();
                         UserInfoController.bind();
                     }
                     else{
@@ -261,6 +285,68 @@ function setRouteController(){
         }
 
     );
+    jRouter().setRouter(
+        {
+            name:'search',
+            type:'get',
+            url:'/search/',
+            fun:[
+                function(isReplace,path){
+                    jump(isReplace,path);
+                    if(document.getElementsByClassName('active-modal').length>0){
+                        document.getElementsByClassName('active-modal')[0].classList.remove('active-modal');
+                    }
+                    //显示主体页
+                    document.getElementsByClassName('full-screen')[0]._css('visibility','visible')._css('display','block');
+                    setActiveLink();
+                    //
+                    var searchParam = jRouter.getUrlParam(path).params;
+                    if(searchParam.length == 1){//参数长度只有1
+                        //说明是默认  本用户
+                        hideMainSections();
+                        window.currentUser.showCurrentUserInfo();
+                        UserInfoController.bind();
+                    }
+                    else{
+                        //说明是某个查找过程
+                        //TODO 补全解析部分
+                    }
+                    hideMainSections();
+                    document.getElementById('search-section')._css("display","block");
+                    //$('#main-section').html('题目 '+problemParam);
+
+                }
+            ]
+        }
+
+    );
+    //更新用户信息
+    jRouter().setRouter(
+        {
+            name:'updateUser',
+            type:'get',
+            url:'/update_user/',
+            fun:[
+                function(isReplace,path){
+                    UserInfoController.updateUserInfo();
+                }
+            ]
+        }
+
+    );
+    jRouter().setRouter(
+        {
+            name:'updatePassword',
+            type:'get',
+            url:'/update_password/',
+            fun:[
+                function(isReplace,path){
+                    UserInfoController.updateUserPWD();
+                }
+            ]
+        }
+
+    );
 
 }
 
@@ -269,8 +355,8 @@ function setRouteController(){
 window.setActiveLink = function()
 {
     var href = window.location.href;
-    var navLinkArray = ['index','problem','contest','message','group'];
-    var titleArray = ['主页','题目','比赛','消息','小组'];
+    var navLinkArray = ['index','problem','contest','message','groupList','search'];
+    var titleArray = ['主页','题目','比赛','消息','小组','搜索'];
     $('#nav a').removeClass('active-link');
     for(var i =0; i<navLinkArray.length; i++)
     {

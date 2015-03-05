@@ -1,0 +1,19 @@
+{
+  "status":  1,
+  "content":  [
+    {
+    "group_id":  1,
+    "name":  "C++2014小组",
+    "contest_count":  "16",
+    "problem_count":  "80",
+    "member_count":  "135"
+    },
+    {
+      "group_id":  2,
+      "name":  "C++2015小组",
+      "contest_count":  "16",
+      "problem_count":  "80",
+      "member_count":  "135"
+    }
+  ]
+}
