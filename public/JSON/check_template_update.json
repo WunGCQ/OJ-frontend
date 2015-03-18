@@ -1,9 +1,11 @@
 {
   "status":1,
   "versionInfo":{
-    "http://localhost:63342/github/ngtest/public/templates/user.html": 1.1,
-    "http://localhost:63342/github/ngtest/public/templates/problem.html": 1.1,
-    "http://localhost:63342/github/ngtest/public/templates/groupList.html": 1.00,
-    "http://localhost:63342/github/ngtest/public/templates/problemlist.html": 1.2
+    "http://localhost:63342/github/ngtest/public/templates/user.html": "6.60",
+    "http://localhost:63342/github/ngtest/public/templates/problem.html": "6.60",
+    "http://localhost:63342/github/ngtest/public/templates/groupList.html": "6.60c",
+    "http://localhost:63342/github/ngtest/public/templates/contestProblemList.html": "6.60c",
+    "http://localhost:63342/github/ngtest/public/templates/contestList.html": "6.61b",
+    "http://localhost:63342/github/ngtest/public/templates/group.html": "6.60"
   }
 }

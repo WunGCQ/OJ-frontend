@@ -1,0 +1,22 @@
+<table>
+    <thead>
+        <tr>
+            <th><span>编号</span></th>
+            <th><span>题目</span></th>
+            <th><span>分数</span></th>
+            <th><span>提交数</span></th>
+            <th><span>通过数</span></th>
+        </tr>
+    </thead>
+    <tbody>
+        {@each content as problem}
+        <tr>
+            <td>${problem.specify}</td>
+            <td><a href="/problem/${problem.id}/">${problem.title}</td>
+            <td>${problem.score}</td>
+            <td>${problem.total_submit}</td>
+            <td>${problem.total_accepted}</td>
+        </tr>
+        {@/each}
+    </tbody>
+</table>

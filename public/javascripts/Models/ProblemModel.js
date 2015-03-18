@@ -23,7 +23,7 @@ ProblemModel.prototype = new Model();
     ProblemModel.prototype.AddPath      = 'http://localhost:63342/github/ngtest/public/JSON/create_problem.json';
     ProblemModel.prototype.RetrievePath = 'http://localhost:63342/github/ngtest/public/JSON/get_problem.json';
     ProblemModel.prototype.UpdatePath   = 'http://localhost:63342/github/ngtest/public/JSON/update_problem.json';
-    ProblemModel.prototype.ProblemDataCache = [];//题目的缓存,缓存的是对象的json Data,省去向服务器查询
+    ProblemModel.prototype.ProblemDataCache = new Array();//题目的缓存,缓存的是对象的json Data,省去向服务器查询
 })();
 
 //
@@ -35,9 +35,11 @@ ProblemModel.prototype.init = function(problemData){
 };
 
 ProblemModel.getProblemDataCache = function(id){
-    for(var i = 0;i < ProblemModel.prototype.ProblemDataCache.length; i++){
-        if(ProblemModel.prototype.ProblemDataCache[i].id = id){
-            return ProblemModel.prototype.ProblemDataCache[i];
+    if(ProblemModel.prototype.ProblemDataCache.length>0){
+        for(var i = 0;i < ProblemModel.prototype.ProblemDataCache.length; i++){
+            if(ProblemModel.prototype.ProblemDataCache[i].id = id){
+                return ProblemModel.prototype.ProblemDataCache[i];
+            }
         }
     }
     return false;

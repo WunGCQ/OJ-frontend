@@ -26,7 +26,7 @@ ContestListModel.prototype = new Model();
 )();
 
 ContestListModel.prototype.init = function(ContestListData){
-    this.modelData = {"contest_list":ContestListData};
+    this.modelData = {"content":ContestListData};
     //for(var key in ContestListData){
     //    this[key] = ContestListData[key];
     //}

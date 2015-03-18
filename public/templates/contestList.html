@@ -1,0 +1,42 @@
+<style>
+    #contest-list{
+        width: 80%;
+        margin: auto;
+    }
+    #contest-list td[colspan="5"]{
+        text-align: center;
+    }
+</style>
+<table id="contest-list">
+    <thead>
+        <tr>
+            <th>比赛编号</th>
+            <th>比赛名称</th>
+            <th>类型</th>
+            <th>开始时间</th>
+            <th>结束时间</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="5"><span>所有比赛</span></td>
+        </tr>
+        {@each content as contest}
+            <tr>
+                <td>
+                    <span>${contest.contest_id}</span>
+                </td>
+                <td>
+                    <span>
+                        <a href="/contest/${contest.contest_id}/">${contest.name}</a>
+                    </span>
+                </td>
+                <td>
+                    <span>${contest.type}</span>
+                </td>
+                <td>${contest.start_time}</td>
+                <td>${contest.end_time}</td>
+            </tr>
+        {@/each}
+    </tbody>
+</table>

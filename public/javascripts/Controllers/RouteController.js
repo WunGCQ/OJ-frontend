@@ -63,14 +63,14 @@ function setRouteController(){
         }
 
     );
-    //题目列表
+    //题目
     jRouter().setRouter(
         {
             name:'problem',
             type:'get',
             url:'/problem/',
             fun:[
-                function(isReplace,path){
+                function(isReplace,path) {
                     jump(isReplace,path);
                     if(document.getElementsByClassName('active-modal').length>0){
                         document.getElementsByClassName('active-modal')[0].classList.remove('active-modal');
@@ -92,9 +92,9 @@ function setRouteController(){
     //比赛
     jRouter().setRouter(
         {
-            name:'contest',
+            name:'contestList',
             type:'get',
-            url:'/contest/',
+            url:'/contestList/',
             fun:[
                 function(isReplace,path){
                     jump(isReplace,path);
@@ -107,7 +107,12 @@ function setRouteController(){
                     //setActiveLink();
                     //TODO 补全参数解析部分
                     hideMainSections();
-                    document.getElementById('contest-section')._css("display","block");
+                    document.getElementById('contest-section')._css("display","block"); 
+                    var contestListPageParam =  jRouter.getUrlParam(path).params[1] - 0;
+                    setActiveLink();
+                    //setActiveLink();
+                    hideMainSections();
+                    window.contestListController.showContestList(contestListPageParam);
 
                 }
             ]
@@ -160,6 +165,32 @@ function setRouteController(){
         }
 
     );
+    //小组
+    jRouter().setRouter(
+        {
+            name:'group',
+            type:'get',
+            url:'/group/',
+            fun:[
+                function(isReplace,path) {
+                    jump(isReplace,path);
+                    if(document.getElementsByClassName('active-modal').length>0){
+                        document.getElementsByClassName('active-modal')[0].classList.remove('active-modal');
+                    }
+                    //显示主体页
+                    document.getElementsByClassName('full-screen')[0]._css('visibility','visible')._css('display','block');
+                    setActiveLink();
+                    var groupParam = parseInt(jRouter.getUrlParam(path).params[1]);
+                    //TODO 补全参数解析部分
+                    hideMainSections();
+                    //显示内容
+                    groupController.showGroup(groupParam);
+                    document.getElementById('group-section')._css("display","block");
+                }
+            ]
+        }
+
+    );
     jRouter().setRouter(
         {
             name:'register',
@@ -194,7 +225,7 @@ function setRouteController(){
             type:'get',
             url:'/login/',
             fun:[
-                function(isReplace,path){
+                function(isReplace,path) {
                     jump(isReplace,path);
                     //隐藏主体页
                     document.getElementsByClassName('full-screen')[0]._css('visibility','hidden')._css('display','none');
@@ -213,7 +244,6 @@ function setRouteController(){
                 }
             ]
         }
-
     );
     //忘记密码
     jRouter().setRouter(

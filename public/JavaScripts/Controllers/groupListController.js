@@ -34,6 +34,8 @@ groupListController.showGroupList = function(page){
         //groupListPageText += juicer(groupListPageText,{"page":{"page":groupListController.page}});
         $(groupListController.scopeBlock).html(groupListPageText);
         groupListController.scopeBlock._css('display','block');
+        var group_list_anchors = groupListController.scopeBlock.getElementsByTagName("a");
+        jRouter.parseAnchor(group_list_anchors);
     });
     
 

@@ -1,3 +1,14 @@
 <article>
-
+    <h2> ${contest.title}</h2>
+    <input type="hidden" data-problem-id="{problem.id}"/>
+    <span>编号：${contest.id}</span>
+    <span>作者：${contest.user_id}</span>
+    <span>所属小组 ${contest.group_id}</span>
+    <span>类型：${contest.type}</span>
+    <time>创建时间: ${contest.create_time}</time>
+    <time>开始时间: ${contest.start_time}</time>
+    <time>结束时间: ${contest.end_time}</time>
+    <section>
+        $${contest.description}
+    </section>
 </article>

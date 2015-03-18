@@ -1,0 +1,14 @@
+{
+  "status":1,
+  "contest":{
+    "name":"示例赛事",
+    "user_id":233,
+    "group_id":233,
+    "type":"逗比",
+    "start_time":"明天",
+    "end_time":"后天",
+    "create_time":"昨天",
+    "description":"<p>其实这是一个悲伤的故事，szm：=>* -> O T_T</p>",
+    "解题报告链接":"http://www.google.com"
+  }
+}

@@ -219,12 +219,15 @@
     {
         var variableName = argObj.type+argObj.name+'Controller';
         jRouter.prototype.Controllers[variableName] = argObj.fun[0];
-        jRouter.prototype.ControllerList.push(
-            {
-                url:argObj.url,
-                controllerFunction:argObj.fun[0]
-            }
-        );
+        if(jRouter.prototype.ControllerList.indexOf(argObj.url) == -1){ //没有则添加，表示一开始每天加打开ControllerList被数组规模吓得半死
+            jRouter.prototype.ControllerList.push(
+                {
+                    url:argObj.url,
+                    controllerFunction:argObj.fun[0]
+                }
+            );
+        }
+
     };
     //选取controller
     jRouter.getControllerByUrl = jRouter.fn.getControllerByUrl = function(url)

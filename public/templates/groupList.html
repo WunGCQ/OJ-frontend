@@ -1,13 +1,13 @@
 <style>
-    #my-groups{
+    #group-list{
         width: 80%;
         margin: auto;
     }
-    #my-groups td[colspan="5"]{
+    #group-list td[colspan="5"]{
         text-align: center;
     }
 </style>
-<table id="my-groups">
+<table id="group-list">
     <thead>
     <tr>
         <th>编号</th>
@@ -29,7 +29,7 @@
         <td>${group.contest_count}</td>
         <td>${group.problem_count}</td>
         <td>${group.member_count}</td>
-        <td><a href="/addGroup/">加入</a></td>
+        <td><a href="/addGroup/">申请加入</a></td>
     </tr>
     {@/each}
     </tbody>
