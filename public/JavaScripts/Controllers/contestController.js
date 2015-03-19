@@ -1,40 +1,18 @@
 /**
  * Created by wungcq on 15/3/7.
  */
-window.contestListController = {};
+window.contestController = {};
 
-contestListController.page = 1;
-
-contestListController.scopeBlock = document.getElementById('contest-list-section');
-contestListController.ContestNumberEachPage = 20;
-contestListController.currentContestList = {};
-
-
-contestListController.convertPageToSize = function(page){
-    if(page == null || typeof page == "undefined" || isNaN(page) ){
-        var pageNumber = contestListController.page;
+contestController.scopeBlock = document.getElementById("contest-section");
+//加载题目页面内容
+contestController.showContest = function(contest_id){
+    if(window.currentContest == null){
+        window.currentContest = new ContestModel();
     }
-    contestListController.start = contestListController.ContestNumberEachPage*(pageNumber-1);
-    return contestListController.start;
-};
-
-contestListController.showContestList = function(page){
-    ContestListModel.prototype.loadTemplate();
-    var startPosition = contestListController.convertPageToSize(page);
-
-    var pageData = {
-        start : startPosition,
-        size  : contestListController.ContestNumberEachPage
-    };
-
-    contestListController.currentContestList = new ContestListModel();
-
-    contestListController.currentContestList.RETRIEVE(pageData,function(){
-        var contestListPageText = contestListController.currentContestList.renderPage();
-        //contestListPageText += juicer(contestListPageText,{"page":{"page":contestListController.page}});
-        $(contestListController.scopeBlock).html(contestListPageText);
-        contestListController.scopeBlock._css('display','block');
+    window.currentContest.loadTemplate();
+    window.currentContest.RETRIEVE(contest_id,function(){
+        var contestPageText = window.currentContest.renderPage();
+        $(contestController.scopeBlock).html(contestPageText);
     });
-
 
 };

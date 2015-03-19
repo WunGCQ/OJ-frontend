@@ -7,8 +7,11 @@
         text-align: center;
     }
 </style>
-<table id="group-list">
+<table id="group-list-table" class="styled-table">
     <thead>
+    <tr>
+        <th colspan="6">所有小组</th>
+    </tr>
     <tr>
         <th>编号</th>
         <th>名称</th>
@@ -19,9 +22,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td colspan="5">所有小组</td>
-    </tr>
+
     {@each group_list as group}
     <tr>
         <td>${group.group_id}</td>
@@ -29,7 +30,7 @@
         <td>${group.contest_count}</td>
         <td>${group.problem_count}</td>
         <td>${group.member_count}</td>
-        <td><a href="/addGroup/">申请加入</a></td>
+        <td><a href="/joinGroup/${group.group_id}">申请加入</a></td>
     </tr>
     {@/each}
     </tbody>

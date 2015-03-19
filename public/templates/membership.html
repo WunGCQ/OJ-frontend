@@ -1,0 +1,40 @@
+<table id="membership-table">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>昵称</th>
+            <th>加入时间</th>
+            <th colspan="2">操作</th>
+        </tr>
+    </thead>
+    <tbody>
+    {@each group_members as group_member}
+        <tr>
+            <td>
+                ${group_member.user_id}
+            </td>
+            <td>
+                <span>${group_member.nickname}</span>
+                <input type="hidden" value="${group_member.nickname}"/>
+            </td>
+            <td>
+                ${group_member.join_time}
+            </td>
+            <td>
+                <a class="button" data-id="${group_member.id}" href="javascript:MembershipController.addChangeView(this);">
+                    修改昵称
+                </a>
+            </td>
+            <td>
+                <!--todo-->
+                <a href="javascript:MembershipController.change();"></a>
+            </td>
+            <td>
+                <a class="button" href="/delete_membership/${group_member.id}">
+                    删除成员
+                </a>
+            </td>
+        </tr>
+    {@/each}
+    </tbody>
+</table>

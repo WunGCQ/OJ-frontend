@@ -23,6 +23,7 @@ GroupModel.prototype = new Model();
     GroupModel.prototype.AddPath      = 'http://localhost:63342/github/ngtest/public/JSON/create_group.json';
     GroupModel.prototype.RetrievePath = 'http://localhost:63342/github/ngtest/public/JSON/get_group.json';
     GroupModel.prototype.UpdatePath   = 'http://localhost:63342/github/ngtest/public/JSON/update_group.json';
+    GroupModel.prototype.joinPath     = 'http://localhost:63342/github/ngtest/public/JSON/join_group.json';
     GroupModel.prototype.GroupDataCache = new Array();//题目的缓存,缓存的是对象的json Data,省去向服务器查询
 })();
 

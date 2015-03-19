@@ -6,7 +6,7 @@ function checkTemplateUpdate(){
         {
             url: 'http://localhost:63342/github/ngtest/public/JSON/check_template_update.json',
             data: null,
-            type: "GET",
+            type: "POST",
             async:false,
             dataType: "json",
             success: function(Data)

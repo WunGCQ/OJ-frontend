@@ -36,6 +36,7 @@ contestListController.showContestList = function(page){
         contestListController.scopeBlock._css('display','block');
         var AnchorsToBind = contestListController.scopeBlock.getElementsByTagName("a");
         jRouter.parseAnchor(AnchorsToBind);
+        $('#contest-list').DataTable();
     });
 
 

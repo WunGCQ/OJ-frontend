@@ -89,7 +89,7 @@ function setRouteController(){
         }
 
     );
-    //比赛
+    //比赛列表
     jRouter().setRouter(
         {
             name:'contestList',
@@ -114,6 +114,32 @@ function setRouteController(){
                     hideMainSections();
                     window.contestListController.showContestList(contestListPageParam);
 
+                }
+            ]
+        }
+
+    );
+    //题目
+    jRouter().setRouter(
+        {
+            name:'contest',
+            type:'get',
+            url:'/contest/',
+            fun:[
+                function(isReplace,path) {
+                    jump(isReplace,path);
+                    if(document.getElementsByClassName('active-modal').length>0){
+                        document.getElementsByClassName('active-modal')[0].classList.remove('active-modal');
+                    }
+                    //显示主体页
+                    document.getElementsByClassName('full-screen')[0]._css('visibility','visible')._css('display','block');
+                    setActiveLink();
+                    var contestParam = jRouter.getUrlParam(path).params[1];
+                    //TODO 补全参数解析部分
+                    hideMainSections();
+                    //显示内容
+                    contestController.showContest(contestParam);
+                    document.getElementById('contest-section')._css("display","block");
                 }
             ]
         }
@@ -186,6 +212,24 @@ function setRouteController(){
                     //显示内容
                     groupController.showGroup(groupParam);
                     document.getElementById('group-section')._css("display","block");
+                }
+            ]
+        }
+
+    );
+    //小组
+    jRouter().setRouter(
+        {
+            name:'joinGroup',
+            type:'get',
+            url:'/joinGroup/',
+            fun:[
+                function(isReplace,path) {
+                    if(confirm("你确认要提交加入该小组的申请吗？")){
+                        var groupNumber = parseInt(jRouter.getUrlParam(path).params[1]);
+                        groupController.submitGroupApplication(groupNumber);
+                    }
+
                 }
             ]
         }
@@ -377,6 +421,7 @@ function setRouteController(){
         }
 
     );
+
 
 }
 
